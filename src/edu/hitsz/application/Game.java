@@ -1,5 +1,9 @@
 package edu.hitsz.application;
 
+import edu.hitsz.Prop.AbstractProp;
+import edu.hitsz.Prop.BoomProp;
+import edu.hitsz.Prop.FIreProp;
+import edu.hitsz.Prop.HpProp;
 import edu.hitsz.aircraft.*;
 import edu.hitsz.bullet.AbstractBullet;
 import edu.hitsz.basic.FlyingObject;
@@ -34,6 +38,7 @@ public class Game extends JPanel {
     private final List<AbstractAircraft> enemyAircrafts;
     private final List<AbstractBullet> heroBullets;
     private final List<AbstractBullet> enemyBullets;
+    private final List<AbstractProp> props;
 
     private int enemyMaxNumber = 5;
 
@@ -49,10 +54,12 @@ public class Game extends JPanel {
 
     /**
      *随机数（0~1）（整型）
-     * 用于随机产生普通敌机或者精英敌机
+     * temp1用于随机产生普通敌机或者精英敌机
+     * temp2用于精英敌机被消灭后随机产生三种道具
      */
     Random r = new Random();
-    private int temp;
+    private int temp1;
+    private int temp2;
 
 
     public Game() {
@@ -64,6 +71,7 @@ public class Game extends JPanel {
         enemyAircrafts = new LinkedList<>();
         heroBullets = new LinkedList<>();
         enemyBullets = new LinkedList<>();
+        props = new LinkedList<>();
 
         //Scheduled 线程池，用于定时任务调度
         executorService = new ScheduledThreadPoolExecutor(1);
@@ -82,15 +90,20 @@ public class Game extends JPanel {
         Runnable task = () -> {
 
             time += timeInterval;
-            
+
+            /**
+             * 创建精英敌机
+             */
+            EliteEnemy feliteenemy = createliteenemy();
+
             // 周期性执行（控制频率）
             if (timeCountAndNewCycleJudge()) {
-                temp = r.nextInt(2);
+                temp1 = r.nextInt(2);
                 System.out.println(time);
                 // 敌机产生
                 if (enemyAircrafts.size() < enemyMaxNumber) {
                     //普通敌机
-                    if(temp == 0){
+                    if(temp1 == 0){
                         enemyAircrafts.add(new MobEnemy(
                                 (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
                                 (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
@@ -101,10 +114,7 @@ public class Game extends JPanel {
                     }
                     //精英敌机
                     else{
-                        /**
-                         * 创建精英敌机
-                         */
-                        EliteEnemy feliteenemy = createliteenemy();
+
                         enemyAircrafts.add(feliteenemy);
                         /**
                          * 精英敌机射出子弹
@@ -116,6 +126,8 @@ public class Game extends JPanel {
                 // 飞机射出子弹
                 shootAction();
             }
+            //道具移动
+            propMoveAction();
 
             // 子弹移动
             bulletsMoveAction();
@@ -192,6 +204,12 @@ public class Game extends JPanel {
         }
     }
 
+    private void propMoveAction(){
+        for (AbstractProp prop : props){
+            prop.forward();
+        }
+    }
+
     private void aircraftsMoveAction() {
         for (AbstractAircraft enemyAircraft : enemyAircrafts) {
             enemyAircraft.forward();
@@ -207,6 +225,17 @@ public class Game extends JPanel {
      */
     private void crashCheckAction() {
         // TODO 敌机子弹攻击英雄
+        for (AbstractBullet fbullet : enemyBullets){
+            if (fbullet.notValid()){
+                continue;
+            }
+            if(heroAircraft.crash(fbullet)){
+                //英雄机撞击到敌机子弹
+                //英雄机损失一定生命值
+                heroAircraft.decreaseHp(fbullet.getPower());
+                fbullet.vanish();
+            }
+        }
 
         // 英雄子弹攻击敌机
         for (AbstractBullet bullet : heroBullets) {
@@ -226,6 +255,30 @@ public class Game extends JPanel {
                     bullet.vanish();
                     if (enemyAircraft.notValid()) {
                         // TODO 获得分数，产生道具补给
+                        if(enemyAircraft instanceof EliteEnemy){
+                            temp2 = r.nextInt(4);
+                            int X = enemyAircraft.getLocationX();
+                            int Y = enemyAircraft.getLocationY();
+                            int speedX = 0;
+                            int speedY = enemyAircraft.getSpeedY();
+                            if (temp2 == 0){
+                                //产生恢复hp道具
+                                HpProp hp = new HpProp(X,Y,speedX,speedY);
+                                props.add(hp);
+                            }
+                            //产生增强火力道具
+                            else if(temp2 == 1){
+                                FIreProp fire = new FIreProp(X,Y,speedX,speedY);
+                                props.add(fire);
+                            }
+                            //产生炸弹道具
+                            else if(temp2 == 2){
+                                BoomProp boom = new BoomProp(X,Y,speedX,speedY);
+                                props.add(boom);
+                            }else{
+                                ;
+                            }
+                        }
                         score += 10;
                     }
                 }
@@ -246,6 +299,7 @@ public class Game extends JPanel {
      * 1. 删除无效的子弹
      * 2. 删除无效的敌机
      * 3. 检查英雄机生存
+     * 4.删除无效的道具
      * <p>
      * 无效的原因可能是撞击或者飞出边界
      */
@@ -253,6 +307,7 @@ public class Game extends JPanel {
         enemyBullets.removeIf(FlyingObject::notValid);
         heroBullets.removeIf(FlyingObject::notValid);
         enemyAircrafts.removeIf(FlyingObject::notValid);
+        props.removeIf(FlyingObject::notValid);
     }
 
 
@@ -278,12 +333,13 @@ public class Game extends JPanel {
             this.backGroundTop = 0;
         }
 
-        // 先绘制子弹，后绘制飞机
+        // 先绘制子弹，后绘制飞机,再绘制道具
         // 这样子弹显示在飞机的下层
         paintImageWithPositionRevised(g, enemyBullets);
         paintImageWithPositionRevised(g, heroBullets);
 
         paintImageWithPositionRevised(g, enemyAircrafts);
+        paintImageWithPositionRevised(g, props);
 
         g.drawImage(ImageManager.HERO_IMAGE, heroAircraft.getLocationX() - ImageManager.HERO_IMAGE.getWidth() / 2,
                 heroAircraft.getLocationY() - ImageManager.HERO_IMAGE.getHeight() / 2, null);
