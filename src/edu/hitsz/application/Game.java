@@ -82,7 +82,7 @@ public class Game extends JPanel {
         Runnable task = () -> {
 
             time += timeInterval;
-
+            
             // 周期性执行（控制频率）
             if (timeCountAndNewCycleJudge()) {
                 temp = r.nextInt(2);
@@ -101,13 +101,15 @@ public class Game extends JPanel {
                     }
                     //精英敌机
                     else{
-                        enemyAircrafts.add(new EliteEnemy(
-                                (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
-                                (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
-                                0,
-                                10,
-                                60
-                        ));
+                        /**
+                         * 创建精英敌机
+                         */
+                        EliteEnemy feliteenemy = createliteenemy();
+                        enemyAircrafts.add(feliteenemy);
+                        /**
+                         * 精英敌机射出子弹
+                         */
+                        enemyBullets.addAll(feliteenemy.shoot());
                     }
 
                 }
@@ -163,9 +165,20 @@ public class Game extends JPanel {
         }
     }
 
+    private  EliteEnemy createliteenemy(){
+        EliteEnemy eliteenemy = new EliteEnemy(
+                (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
+                (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
+                0,
+                10,
+                60
+        );
+        return eliteenemy;
+    }
+
     private void shootAction() {
         // TODO 敌机射击
-
+        //代码写在了创建精英敌机处，更方便
         // 英雄射击
         heroBullets.addAll(heroAircraft.shoot());
     }
