@@ -291,6 +291,20 @@ public class Game extends JPanel {
         }
 
         // Todo: 我方获得道具，道具生效
+        for(AbstractProp prop : props){
+            if (prop.crash(heroAircraft )|| heroAircraft.crash(prop)){
+                if(prop instanceof HpProp){
+                    heroAircraft.decreaseHp(((HpProp) prop).increasehp());
+                }else if(prop instanceof BoomProp){
+                    ((BoomProp) prop).boom();
+                }else if(prop instanceof FIreProp){
+                    ((FIreProp) prop).fire();
+                }else{
+                    ;
+                }
+                prop.vanish();
+            }
+        }
 
     }
 
