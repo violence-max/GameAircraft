@@ -47,6 +47,13 @@ public class Game extends JPanel {
     private int cycleDuration = 600;
     private int cycleTime = 0;
 
+    /**
+     *随机数（0~1）（整型）
+     * 用于随机产生普通敌机或者精英敌机
+     */
+    Random r = new Random();
+    private int temp;
+
 
     public Game() {
         heroAircraft = new HeroAircraft(
@@ -78,16 +85,31 @@ public class Game extends JPanel {
 
             // 周期性执行（控制频率）
             if (timeCountAndNewCycleJudge()) {
+                temp = r.nextInt(2);
                 System.out.println(time);
-                // 新敌机产生
+                // 敌机产生
                 if (enemyAircrafts.size() < enemyMaxNumber) {
-                    enemyAircrafts.add(new MobEnemy(
-                            (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
-                            (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
-                            0,
-                            10,
-                            30
-                    ));
+                    //普通敌机
+                    if(temp == 0){
+                        enemyAircrafts.add(new MobEnemy(
+                                (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
+                                (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
+                                0,
+                                10,
+                                30
+                        ));
+                    }
+                    //精英敌机
+                    else{
+                        enemyAircrafts.add(new EliteEnemy(
+                                (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
+                                (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
+                                0,
+                                10,
+                                60
+                        ));
+                    }
+
                 }
                 // 飞机射出子弹
                 shootAction();
