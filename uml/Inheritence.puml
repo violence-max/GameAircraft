@@ -43,8 +43,15 @@ abstract class AbstractBullet
 	+ getPower():int
 }
 
+abstract class AbstractProp
+{
+    +AbstractProp(int locationX,int locationY,int speedX,int speedY):void
+    +forward():void
+}
+
 FlyingObject <|-- AbstractAircraft
 FlyingObject <|-- AbstractBullet
+FlyingObject <|-- AbstractProp
 
 AbstractAircraft <|-- HeroAircraft
 AbstractAircraft <|-- MobEnemy
@@ -52,6 +59,10 @@ AbstractAircraft <|-- EliteEnemy
 
 AbstractBullet <|-- HeroBullet
 AbstractBullet <|-- EnemyBullet
+
+AbstractProp <|-- HpProp
+AbstractProp <|-- FireProp
+AbstractProp <|-- BoomProp
 
 class HeroAircraft {
     - int shootNum
@@ -74,6 +85,23 @@ class EliteEnemy {
     + shoot():List<Bullet>
 }
 
+class HpProp{
+    -int hp
+    +HpProp(int locationX,int locationY,int speedX,int speedY):void
+    +forward():void
+}
+
+class FireProp{
+    +FireProp(int locationX,int locationY,int speedX,int speedY):void
+    +forward():void
+    +increasefire():void
+}
+
+class BoomProp{
+    +BoomProp(int locationX,int locationY,int speedX,int speedY):void
+    +forward():void
+    +getboom():void.
+}
 
 
 
