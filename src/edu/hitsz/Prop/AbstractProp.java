@@ -1,10 +1,9 @@
 package edu.hitsz.Prop;
 
-import edu.hitsz.aircraft.AbstractAircraft;
 import edu.hitsz.application.Main;
-import edu.hitsz.basic.FlyingObject;
+import edu.hitsz.basic.AbstrcatFlyingObject;
 
-public class AbstractProp extends FlyingObject {
+public class AbstractProp extends AbstrcatFlyingObject {
     public AbstractProp(int locationX,int locationY,int speedX,int speedY){
         super(locationX,locationY,speedX,speedY);
     }

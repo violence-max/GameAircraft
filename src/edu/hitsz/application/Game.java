@@ -5,8 +5,8 @@ import edu.hitsz.Prop.BoomProp;
 import edu.hitsz.Prop.FIreProp;
 import edu.hitsz.Prop.HpProp;
 import edu.hitsz.aircraft.*;
-import edu.hitsz.bullet.AbstractBullet;
-import edu.hitsz.basic.FlyingObject;
+import edu.hitsz.bullet.BaseBullet;
+import edu.hitsz.basic.AbstrcatFlyingObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,8 +36,8 @@ public class Game extends JPanel {
 
     private final HeroAircraft heroAircraft;
     private final List<AbstractAircraft> enemyAircrafts;
-    private final List<AbstractBullet> heroBullets;
-    private final List<AbstractBullet> enemyBullets;
+    private final List<BaseBullet> heroBullets;
+    private final List<BaseBullet> enemyBullets;
     private final List<AbstractProp> props;
 
     private int enemyMaxNumber = 5;
@@ -196,10 +196,10 @@ public class Game extends JPanel {
     }
 
     private void bulletsMoveAction() {
-        for (AbstractBullet bullet : heroBullets) {
+        for (BaseBullet bullet : heroBullets) {
             bullet.forward();
         }
-        for (AbstractBullet bullet : enemyBullets) {
+        for (BaseBullet bullet : enemyBullets) {
             bullet.forward();
         }
     }
@@ -225,7 +225,7 @@ public class Game extends JPanel {
      */
     private void crashCheckAction() {
         // TODO 敌机子弹攻击英雄
-        for (AbstractBullet fbullet : enemyBullets){
+        for (BaseBullet fbullet : enemyBullets){
             if (fbullet.notValid()){
                 continue;
             }
@@ -238,7 +238,7 @@ public class Game extends JPanel {
         }
 
         // 英雄子弹攻击敌机
-        for (AbstractBullet bullet : heroBullets) {
+        for (BaseBullet bullet : heroBullets) {
             if (bullet.notValid()) {
                 continue;
             }
@@ -318,10 +318,10 @@ public class Game extends JPanel {
      * 无效的原因可能是撞击或者飞出边界
      */
     private void postProcessAction() {
-        enemyBullets.removeIf(FlyingObject::notValid);
-        heroBullets.removeIf(FlyingObject::notValid);
-        enemyAircrafts.removeIf(FlyingObject::notValid);
-        props.removeIf(FlyingObject::notValid);
+        enemyBullets.removeIf(AbstrcatFlyingObject::notValid);
+        heroBullets.removeIf(AbstrcatFlyingObject::notValid);
+        enemyAircrafts.removeIf(AbstrcatFlyingObject::notValid);
+        props.removeIf(AbstrcatFlyingObject::notValid);
     }
 
 
@@ -363,12 +363,12 @@ public class Game extends JPanel {
 
     }
 
-    private void paintImageWithPositionRevised(Graphics g, List<? extends FlyingObject> objects) {
+    private void paintImageWithPositionRevised(Graphics g, List<? extends AbstrcatFlyingObject> objects) {
         if (objects.size() == 0) {
             return;
         }
 
-        for (FlyingObject object : objects) {
+        for (AbstrcatFlyingObject object : objects) {
             BufferedImage image = object.getImage();
             assert image != null : objects.getClass().getName() + " has no image! ";
             g.drawImage(image, object.getLocationX() - image.getWidth() / 2,
