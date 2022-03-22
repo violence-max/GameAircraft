@@ -97,6 +97,7 @@ public class Game extends JPanel {
              * 创建精英敌机
              */
             EliteEnemy feliteenemy = createliteenemy();
+            MobEnemy fmobenemy = creatmobenemy();
 
             // 周期性执行（控制频率）
             if (timeCountAndNewCycleJudge()) {
@@ -106,13 +107,7 @@ public class Game extends JPanel {
                 if (enemyAircrafts.size() < enemyMaxNumber) {
                     //普通敌机
                     if(temp1 == 0){
-                        enemyAircrafts.add(new MobEnemy(
-                                (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
-                                (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
-                                0,
-                                10,
-                                30
-                        ));
+                        enemyAircrafts.add(fmobenemy);
                     }
                     //精英敌机
                     else{
@@ -180,14 +175,21 @@ public class Game extends JPanel {
     }
 
     private  EliteEnemy createliteenemy(){
-        EliteEnemy eliteenemy = new EliteEnemy(
-                (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
-                (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
-                0,
-                10,
-                60
-        );
-        return eliteenemy;
+        EnemyAircraftFactory eliteenemyfactory;
+        EnemyAircraftProduct eliteenemyproduct;
+
+        eliteenemyfactory = new CreatEliteEnemy();
+        eliteenemyproduct = eliteenemyfactory.creatEnemyProduct();
+        return eliteenemyproduct.createliteenemy();
+    }
+
+    private  MobEnemy creatmobenemy(){
+        EnemyAircraftFactory mobenemyfactory;
+        EnemyAircraftProduct mobenemyproduct;
+
+        mobenemyfactory = new CreatMobeEnemy();
+        mobenemyproduct = mobenemyfactory.creatEnemyProduct();
+        return mobenemyproduct.creatmobenemy();
     }
 
     private void shootAction() {

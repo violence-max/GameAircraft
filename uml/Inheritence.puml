@@ -45,8 +45,8 @@ abstract class BaseBullet
 
 abstract class AbstractProp
 {
-    +AbstractProp(int locationX,int locationY,int speedX,int speedY)
-    +forward():void
+    + AbstractProp(int locationX,int locationY,int speedX,int speedY)
+    + forward():void
 }
 
 AbstractFlyingObject <|-- AbstractAircraft
@@ -77,12 +77,16 @@ class MobEnemy {
     + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
     + shoot():List<BaseBullet>
+    + creatmobnemy():MobEnemy
+    + createliteenemy():null
 }
 
 class EliteEnemy {
-    + ElitEnemy(int locationX, int locationY, int speedX, int speedY, int hp):void
+    + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp):void
     + forward():void
     + shoot():List<BaseBullet>
+    + createliteenemy():EliteEnemy
+    + creatmobnemy():null
 }
 
 class HeroBullet {
@@ -96,19 +100,41 @@ class EnemyBullet {
 }
 
 class HpProp{
-    -hp:int
-    +HpProp(int locationX,int locationY,int speedX,int speedY)
-    +increasehp():int
+    - hp:int
+    + HpProp(int locationX,int locationY,int speedX,int speedY)
+    + ncreasehp():int
 }
 
 class FireProp{
-    +FireProp(int locationX,int locationY,int speedX,int speedY):void
-    +fire():void
+    + FireProp(int locationX,int locationY,int speedX,int speedY):void
+    + fire():void
 }
 
 class BoomProp{
-    +BoomProp(int locationX,int locationY,int speedX,int speedY):void
-    +boom():void
+    + BoomProp(int locationX,int locationY,int speedX,int speedY):void
+    + boom():void
 }
 
+interface EnemyAircraftFactory{
+    + creatEnemyProduct():EnemyAircraftProduct
+}
+
+interface EnemyAircraftProduct{
+    + createliteenemy()
+    + creatmobnemy()
+}
+
+EnemyAircraftProduct <|.. EliteEnemy
+EnemyAircraftProduct <|.. MobEnemy
+
+EnemyAircraftFactory <|.. CreatEliteEnemy
+EnemyAircraftFactory <|.. CreatMobEnemy
+
+class CreatEliteEnemy{
+    + creatEnemyProduct():EnemyAircraftProduct
+}
+
+class CreatMobEnemy{
+    + creatEnemyProduct():EnemyAircraftProduct
+}
 @enduml

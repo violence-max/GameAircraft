@@ -1,6 +1,7 @@
 package edu.hitsz.aircraft;
 
 import edu.hitsz.application.Game;
+import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.bullet.EnemyBullet;
@@ -13,7 +14,7 @@ import java.util.List;
  * 精英敌机
  * 
  */
-public class EliteEnemy extends AbstractAircraft{
+public class EliteEnemy extends AbstractAircraft implements EnemyAircraftProduct{
 
     /** 攻击方式 */
     private int elite_shootNum = 1;     //子弹一次发射数量
@@ -52,5 +53,23 @@ public class EliteEnemy extends AbstractAircraft{
             res.add(basebullet);
         }
         return res;
+    }
+
+
+
+
+    @Override
+    public EliteEnemy createliteenemy() {
+        return new EliteEnemy(
+                (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
+                (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
+                0,
+                10,
+                60);
+    }
+
+    @Override
+    public MobEnemy creatmobenemy() {
+        return null;
     }
 }
