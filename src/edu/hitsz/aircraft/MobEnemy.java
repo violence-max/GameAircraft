@@ -49,4 +49,9 @@ public class MobEnemy extends AbstractAircraft implements EnemyAircraftProduct{
                 10,
                 30);
     }
+
+    @Override
+    public BossEnemy creatbossenemy() {
+        return null;
+    }
 }

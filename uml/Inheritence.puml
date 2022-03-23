@@ -56,6 +56,8 @@ AbstractFlyingObject <|-- AbstractProp
 AbstractAircraft <|-- HeroAircraft
 AbstractAircraft <|-- MobEnemy
 AbstractAircraft <|-- EliteEnemy
+AbstractAircraft <|-- BossEnemy
+
 
 BaseBullet <|-- HeroBullet
 BaseBullet <|-- EnemyBullet
@@ -80,7 +82,8 @@ class MobEnemy {
     + forward():void
     + shoot():List<BaseBullet>
     + creatmobnemy():MobEnemy
-    + createliteenemy():null
+    + createliteenemy():EliteEnemy
+    + creatbossenemy():BossEnemy
 }
 
 class EliteEnemy {
@@ -88,7 +91,17 @@ class EliteEnemy {
     + forward():void
     + shoot():List<BaseBullet>
     + createliteenemy():EliteEnemy
-    + creatmobnemy():null
+    + creatmobnemy():MobEnemy
+    + creatbossenemy():BossEnemy
+}
+
+class BossEnemy{
+    + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + createliteenemy():EliteEnemy
+    + creatmobnemy():MobEnemy
+    + creatbossenemy():BossEnemy
 }
 
 class HeroBullet {

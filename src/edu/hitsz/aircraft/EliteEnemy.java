@@ -72,4 +72,9 @@ public class EliteEnemy extends AbstractAircraft implements EnemyAircraftProduct
     public MobEnemy creatmobenemy() {
         return null;
     }
+
+    @Override
+    public BossEnemy creatbossenemy() {
+        return null;
+    }
 }
