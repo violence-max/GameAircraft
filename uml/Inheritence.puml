@@ -68,9 +68,11 @@ class HeroAircraft {
     - shootNum:int
     - power:int
     - direction:int
+    + heroaircraft:HeroAircraft
     + HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
     + shoot():List<BaseBullet>
+    + getheroaircraft():HeroAircraft
 }
 
 class MobEnemy {
@@ -115,26 +117,5 @@ class BoomProp{
     + boom():void
 }
 
-interface EnemyAircraftFactory{
-    + creatEnemyProduct():EnemyAircraftProduct
-}
 
-interface EnemyAircraftProduct{
-    + createliteenemy()
-    + creatmobnemy()
-}
-
-EnemyAircraftProduct <|.. EliteEnemy
-EnemyAircraftProduct <|.. MobEnemy
-
-EnemyAircraftFactory <|.. CreatEliteEnemy
-EnemyAircraftFactory <|.. CreatMobEnemy
-
-class CreatEliteEnemy{
-    + creatEnemyProduct():EnemyAircraftProduct
-}
-
-class CreatMobEnemy{
-    + creatEnemyProduct():EnemyAircraftProduct
-}
 @enduml

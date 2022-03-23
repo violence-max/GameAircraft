@@ -77,11 +77,6 @@ public class Game extends JPanel {
         new HeroController(this, heroAircraft);
 
     }
-//
-//    //双重锁定创建英雄机
-//    private HeroAircraft creatheroaircraft(){
-//
-//    }
 
     /**
      * 游戏启动入口，执行游戏逻辑
