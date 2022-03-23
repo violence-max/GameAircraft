@@ -81,27 +81,18 @@ class MobEnemy {
     + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
     + shoot():List<BaseBullet>
-    + creatmobnemy():MobEnemy
-    + createliteenemy():EliteEnemy
-    + creatbossenemy():BossEnemy
 }
 
 class EliteEnemy {
     + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp):void
     + forward():void
     + shoot():List<BaseBullet>
-    + createliteenemy():EliteEnemy
-    + creatmobnemy():MobEnemy
-    + creatbossenemy():BossEnemy
 }
 
 class BossEnemy{
     + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
     + shoot():List<BaseBullet>
-    + createliteenemy():EliteEnemy
-    + creatmobnemy():MobEnemy
-    + creatbossenemy():BossEnemy
 }
 
 class HeroBullet {

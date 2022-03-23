@@ -11,17 +11,17 @@ interface EnemyAircraftProduct{
     + creatbossenemy():BossEnemy
 }
 
-EnemyAircraftProduct <|.. EliteEnemy
-EnemyAircraftProduct <|.. MobEnemy
-EnemyAircraftProduct <|.. BossEnemy
+EnemyAircraftProduct <|.. EliteEnemyProduct
+EnemyAircraftProduct <|.. MobEnemyProduct
+EnemyAircraftProduct <|.. BossEnemyProduct
 
 EnemyAircraftFactory <|.. CreatEliteEnemy
 EnemyAircraftFactory <|.. CreatMobEnemy
 EnemyAircraftFactory <|.. CreatBossEnemy
 
-CreatMobEnemy <.. MobEnemy
-CreatEliteEnemy <.. EliteEnemy
-CreatBossEnemy <.. BossEnemy
+CreatMobEnemy <.. MobEnemyProduct
+CreatEliteEnemy <.. EliteEnemyProduct
+CreatBossEnemy <.. BossEnemyProduct
 
 class CreatEliteEnemy{
     + creatEnemyProduct():EnemyAircraftProduct
@@ -35,28 +35,19 @@ class CreatBossEnemy{
     + creatEnemyProduct():EnemyAircraftProduct
 }
 
-class MobEnemy {
-    + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
-    + forward():void
-    + shoot():List<BaseBullet>
+class MobEnemyProduct {
     + creatmobnemy():MobEnemy
     + createliteenemy():EliteEnemy
     + creatbossenemy():BossEnemy
 }
 
-class EliteEnemy {
-    + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp):void
-    + forward():void
-    + shoot():List<BaseBullet>
+class EliteEnemyProduct {
     + createliteenemy():EliteEnemy
     + creatmobnemy():MobEnemy
     + creatbossenemy():BossEnemy
 }
 
-class BossEnemy{
-    + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
-    + forward():void
-    + shoot():List<BaseBullet>
+class BossEnemyProduct{
     + createliteenemy():EliteEnemy
     + creatmobnemy():MobEnemy
     + creatbossenemy():BossEnemy

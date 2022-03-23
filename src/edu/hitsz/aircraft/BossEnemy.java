@@ -7,7 +7,7 @@ import edu.hitsz.bullet.EnemyBullet;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BossEnemy extends AbstractAircraft implements EnemyAircraftProduct{
+public class BossEnemy extends AbstractAircraft {
     public BossEnemy(int locationX,int locationY,int speddX,int speedY,int hp){
         super(locationX,locationY,speddX,speedY,hp);
     }
@@ -26,18 +26,5 @@ public class BossEnemy extends AbstractAircraft implements EnemyAircraftProduct{
         return new LinkedList<>();
     }
 
-    @Override
-    public BossEnemy creatbossenemy() {
-        return null;
-    }
 
-    @Override
-    public EliteEnemy createliteenemy() {
-        return null;
-    }
-
-    @Override
-    public MobEnemy creatmobenemy() {
-        return null;
-    }
 }

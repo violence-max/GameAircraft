@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author hitsz
  */
-public class MobEnemy extends AbstractAircraft implements EnemyAircraftProduct{
+public class MobEnemy extends AbstractAircraft {
 
     public MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
@@ -24,7 +24,7 @@ public class MobEnemy extends AbstractAircraft implements EnemyAircraftProduct{
     public void forward() {
         super.forward();
         // 判定 y 轴向下飞行出界
-        if (locationY >= Main.WINDOW_HEIGHT ) {
+        if (locationY >= Main.WINDOW_HEIGHT) {
             vanish();
         }
     }
@@ -33,25 +33,6 @@ public class MobEnemy extends AbstractAircraft implements EnemyAircraftProduct{
     public List<BaseBullet> shoot() {
         return new LinkedList<>();
     }
-
-
-    @Override
-    public EliteEnemy createliteenemy() {
-        return null;
-    }
-
-    @Override
-    public MobEnemy creatmobenemy() {
-        return new MobEnemy(
-                (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
-                (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
-                0,
-                10,
-                30);
-    }
-
-    @Override
-    public BossEnemy creatbossenemy() {
-        return null;
-    }
 }
+
+
