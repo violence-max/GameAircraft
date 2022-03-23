@@ -1,6 +1,6 @@
-package edu.hitsz.Prop;
+package edu.hitsz.propfactory;
 
-public class CreatHpProp extends PropFactory{
+public class CreatHpProp extends PropFactory {
     @Override
     public PropProduct creatPropProduct(int locationX, int locationY, int speedX, int speedY) {
         return new HpPropProduct(locationX,locationY,speedX,speedY);

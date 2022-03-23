@@ -4,6 +4,8 @@ import edu.hitsz.Prop.*;
 import edu.hitsz.aircraft.*;
 import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.basic.AbstrcatFlyingObject;
+import edu.hitsz.enemyfactory.*;
+import edu.hitsz.propfactory.*;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,7 +1,4 @@
-package edu.hitsz.aircraft;
-
-import edu.hitsz.application.ImageManager;
-import edu.hitsz.application.Main;
+package edu.hitsz.enemyfactory;
 
 public class CreatMobeEnemy implements EnemyAircraftFactory {
     @Override

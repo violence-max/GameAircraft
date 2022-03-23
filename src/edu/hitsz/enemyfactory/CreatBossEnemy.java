@@ -1,6 +1,6 @@
-package edu.hitsz.aircraft;
+package edu.hitsz.enemyfactory;
 
-public class CreatBossEnemy implements EnemyAircraftFactory{
+public class CreatBossEnemy implements EnemyAircraftFactory {
     @Override
     public EnemyAircraftProduct creatEnemyProduct() {
         return null;

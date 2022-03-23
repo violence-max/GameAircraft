@@ -1,6 +1,10 @@
-package edu.hitsz.aircraft;
+package edu.hitsz.enemyfactory;
 
-public class BossEnemyProduct implements EnemyAircraftProduct{
+import edu.hitsz.aircraft.BossEnemy;
+import edu.hitsz.aircraft.EliteEnemy;
+import edu.hitsz.aircraft.MobEnemy;
+
+public class BossEnemyProduct implements EnemyAircraftProduct {
     @Override
     public EliteEnemy createliteenemy() {
         return null;

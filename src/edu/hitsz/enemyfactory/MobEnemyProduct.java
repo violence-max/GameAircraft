@@ -1,11 +1,14 @@
-package edu.hitsz.aircraft;
+package edu.hitsz.enemyfactory;
 
+import edu.hitsz.aircraft.BossEnemy;
+import edu.hitsz.aircraft.EliteEnemy;
+import edu.hitsz.aircraft.MobEnemy;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
 
-public class EliteEnemyProduct implements EnemyAircraftProduct{
+public class MobEnemyProduct implements EnemyAircraftProduct {
     @Override
-    public MobEnemy creatmobenemy() {
+    public EliteEnemy createliteenemy() {
         return null;
     }
 
@@ -15,12 +18,12 @@ public class EliteEnemyProduct implements EnemyAircraftProduct{
     }
 
     @Override
-    public EliteEnemy createliteenemy() {
-        return new EliteEnemy(
+    public MobEnemy creatmobenemy() {
+        return new MobEnemy(
                 (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
                 (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
                 0,
                 10,
-                60);
+                30);
     }
 }
