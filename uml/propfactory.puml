@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class HpPropProduct{
+    + HpPropProduct(int locationX,int locationY,int speedX,int speedY)
+    + creathpprop(int locationX, int locationY, int speedX, int speedY):HpProp
+}
+
+class FirePropProduct{
+    + FirePropProduct(int locationX,int locationY,int speedX,int speedY)
+    + creatfireprop(int locationX, int locationY, int speedX, int speedY):FireProp
+}
+
+class BoomPropProduct{
+    + BoomPropProduct(int locationX,int locationY,int speedX,int speedY)
+    + creatboomprop(int locationX, int locationY, int speedX, int speedY):BoomProp
+}
+
+class PropFactory{
+    + creatPropProduct():PropProduct
+}
+
+class PropProduct{
+    + creathpprop():HpProp
+    + creatfireprop():FireProp
+    + creatboomprop():BoomProp
+}
+
+class CreatHpProp{
+    + creatPropProduct():PropProduct
+}
+
+class CreatFireProp{
+    + creatPropProduct():PropProduct
+}
+
+class CreatBoomProp{
+    + creatPropProduct():PropProduct
+}
+
+PropFactory <|.. CreatHpProp
+PropFactory <|.. CreatFireProp
+PropFactory <|.. CreatBoomProp
+
+PropProduct <|.. HpPropProduct
+PropProduct <|.. FirePropProduct
+PropProduct <|.. BoomPropProduct
+
+CreatHpProp <.. HpPropProduct
+CreatFireProp <.. FirePropProduct
+CreatBoomProp <.. BoomPropProduct
+
+@enduml

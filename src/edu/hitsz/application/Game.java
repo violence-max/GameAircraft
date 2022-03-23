@@ -1,9 +1,6 @@
 package edu.hitsz.application;
 
-import edu.hitsz.Prop.AbstractProp;
-import edu.hitsz.Prop.BoomProp;
-import edu.hitsz.Prop.FIreProp;
-import edu.hitsz.Prop.HpProp;
+import edu.hitsz.Prop.*;
 import edu.hitsz.aircraft.*;
 import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.basic.AbstrcatFlyingObject;
@@ -215,6 +212,47 @@ public class Game extends JPanel {
         }
     }
 
+    private HpProp creathpprop(AbstractAircraft enemyaircraft) {
+        int x = enemyaircraft.getLocationX();
+        int y = enemyaircraft.getLocationY();
+        int speedX = 0;
+        int speedY = enemyaircraft.getSpeedY();
+
+        PropFactory hppropfactory;
+        PropProduct hppropproduct;
+
+        hppropfactory = new CreatHpProp();
+        hppropproduct= hppropfactory.creatPropProduct(x,y,speedX,speedY);
+        return hppropproduct.creathpprop(x,y,speedX,speedY);
+    }
+
+    private FireProp creatfireprop(AbstractAircraft enemyaircraft) {
+        int x = enemyaircraft.getLocationX();
+        int y = enemyaircraft.getLocationY();
+        int speedX = 0;
+        int speedY = enemyaircraft.getSpeedY();
+
+        PropFactory firepropfactory;
+        PropProduct firepropproduct;
+
+        firepropfactory = new CreatHpProp();
+        firepropproduct= firepropfactory.creatPropProduct(x,y,speedX,speedY);
+        return firepropproduct.creatfireprop(x,y,speedX,speedY);
+    }
+
+    private BoomProp creatboomprop(AbstractAircraft enemyaircraft) {
+        int x = enemyaircraft.getLocationX();
+        int y = enemyaircraft.getLocationY();
+        int speedX = 0;
+        int speedY = enemyaircraft.getSpeedY();
+
+        PropFactory boompropfactory;
+        PropProduct boompropproduct;
+
+        boompropfactory = new CreatHpProp();
+        boompropproduct= boompropfactory.creatPropProduct(x,y,speedX,speedY);
+        return boompropproduct.creatboomprop(x,y,speedX,speedY);
+    }
 
     /**
      * 碰撞检测：
@@ -256,23 +294,19 @@ public class Game extends JPanel {
                         // TODO 获得分数，产生道具补给
                         if(enemyAircraft instanceof EliteEnemy){
                             temp2 = r.nextInt(4);
-                            int X = enemyAircraft.getLocationX();
-                            int Y = enemyAircraft.getLocationY();
-                            int speedX = 0;
-                            int speedY = enemyAircraft.getSpeedY();
                             if (temp2 == 0){
                                 //产生恢复hp道具
-                                HpProp hp = new HpProp(X,Y,speedX,speedY);
+                                HpProp hp = creathpprop(enemyAircraft);
                                 props.add(hp);
                             }
                             //产生增强火力道具
                             else if(temp2 == 1){
-                                FIreProp fire = new FIreProp(X,Y,speedX,speedY);
+                                FireProp fire = creatfireprop(enemyAircraft);
                                 props.add(fire);
                             }
                             //产生炸弹道具
                             else if(temp2 == 2){
-                                BoomProp boom = new BoomProp(X,Y,speedX,speedY);
+                                BoomProp boom = creatboomprop(enemyAircraft);
                                 props.add(boom);
                             }else{
                                 ;
@@ -289,6 +323,7 @@ public class Game extends JPanel {
             }
         }
 
+
         // Todo: 我方获得道具，道具生效
         for(AbstractProp prop : props){
             if (prop.crash(heroAircraft )|| heroAircraft.crash(prop)){
@@ -296,8 +331,8 @@ public class Game extends JPanel {
                     heroAircraft.decreaseHp(((HpProp) prop).increasehp());
                 }else if(prop instanceof BoomProp){
                     ((BoomProp) prop).boom();
-                }else if(prop instanceof FIreProp){
-                    ((FIreProp) prop).fire();
+                }else if(prop instanceof FireProp){
+                    ((FireProp) prop).fire();
                 }else{
                     ;
                 }

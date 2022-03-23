@@ -1,6 +1,6 @@
 package edu.hitsz.Prop;
 
-public class HpProp extends AbstractProp{
+public class HpProp extends AbstractProp {
 
     private int hp = -50;
 
