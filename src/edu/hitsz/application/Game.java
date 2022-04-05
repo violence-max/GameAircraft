@@ -237,7 +237,7 @@ public class Game extends JPanel {
         PropFactory firepropfactory;
         PropProduct firepropproduct;
 
-        firepropfactory = new CreatHpProp();
+        firepropfactory = new CreatFireProp();
         firepropproduct= firepropfactory.creatPropProduct(x,y,speedX,speedY);
         return firepropproduct.creatfireprop(x,y,speedX,speedY);
     }
@@ -251,7 +251,7 @@ public class Game extends JPanel {
         PropFactory boompropfactory;
         PropProduct boompropproduct;
 
-        boompropfactory = new CreatHpProp();
+        boompropfactory = new CreatBoomProp();
         boompropproduct= boompropfactory.creatPropProduct(x,y,speedX,speedY);
         return boompropproduct.creatboomprop(x,y,speedX,speedY);
     }

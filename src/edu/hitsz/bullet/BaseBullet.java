@@ -12,6 +12,7 @@ import edu.hitsz.basic.AbstrcatFlyingObject;
  */
 public class BaseBullet extends AbstrcatFlyingObject {
 
+
     private int power = 10;
 
     public BaseBullet(int locationX, int locationY, int speedX, int speedY, int power) {
