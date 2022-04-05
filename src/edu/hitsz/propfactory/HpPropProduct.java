@@ -2,7 +2,7 @@ package edu.hitsz.propfactory;
 
 import edu.hitsz.Prop.HpProp;
 
-public class HpPropProduct extends PropProduct {
+public class HpPropProduct extends AbstractPropProduct {
 
     public HpPropProduct(int locationX, int locationY, int speedX, int speedY){
 

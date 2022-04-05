@@ -5,8 +5,8 @@ import edu.hitsz.enemyfactory.CreatEliteEnemy;
 import edu.hitsz.enemyfactory.EnemyAircraftFactory;
 import edu.hitsz.enemyfactory.EnemyAircraftProduct;
 import edu.hitsz.propfactory.CreatHpProp;
-import edu.hitsz.propfactory.PropFactory;
-import edu.hitsz.propfactory.PropProduct;
+import edu.hitsz.propfactory.AbstractPropFactory;
+import edu.hitsz.propfactory.AbstractPropProduct;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -36,8 +36,8 @@ class BoomPropTest {
         int speedX = 0;
         int speedY = eliteenemy.getSpeedY();
 
-        PropFactory boompropfactory;
-        PropProduct boompropproduct;
+        AbstractPropFactory boompropfactory;
+        AbstractPropProduct boompropproduct;
 
         boompropfactory = new CreatHpProp();
         boompropproduct= boompropfactory.creatPropProduct(x,y,speedX,speedY);

@@ -2,7 +2,7 @@ package edu.hitsz.propfactory;
 
 import edu.hitsz.Prop.FireProp;
 
-public class FirePropProduct extends PropProduct {
+public class FirePropProduct extends AbstractPropProduct {
     public FirePropProduct(int locationX, int locationY, int speedX, int speedY){
 
     }

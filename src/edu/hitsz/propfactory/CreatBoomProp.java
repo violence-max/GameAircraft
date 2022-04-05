@@ -1,8 +1,8 @@
 package edu.hitsz.propfactory;
 
-public class CreatBoomProp extends PropFactory {
+public class CreatBoomProp extends AbstractPropFactory {
     @Override
-    public PropProduct creatPropProduct(int locationX, int locationY, int speedX, int speedY) {
+    public AbstractPropProduct creatPropProduct(int locationX, int locationY, int speedX, int speedY) {
         return new BoomPropProduct(locationX,locationY,speedX,speedY);
     }
 }

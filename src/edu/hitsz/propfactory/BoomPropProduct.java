@@ -2,7 +2,7 @@ package edu.hitsz.propfactory;
 
 import edu.hitsz.Prop.BoomProp;
 
-public class BoomPropProduct extends PropProduct {
+public class BoomPropProduct extends AbstractPropProduct {
     public BoomPropProduct(int locationX, int locationY, int speedX, int speedY){
 
     }

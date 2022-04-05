@@ -17,9 +17,9 @@ import java.util.List;
 public class EliteEnemy extends AbstractAircraft{
 
     /** 攻击方式 */
-    private int elite_shootNum = 1;     //子弹一次发射数量
-    private int elite_power = 50;       //子弹伤害
-    private int elite_direction = 1;  //子弹射击方向 (向上发射：-1，向下发射：1)
+    private int eliteShootNum = 1;     //子弹一次发射数量
+    private int elitePower = 50;       //子弹伤害
+    private int eLiteDirection = 1;  //子弹射击方向 (向上发射：-1，向下发射：1)
 
     public EliteEnemy(int locationX,int locationY,int speedX,int speedY,int hp){
         super(locationX,locationY,speedX,speedY,hp);
@@ -42,14 +42,14 @@ public class EliteEnemy extends AbstractAircraft{
     public List<BaseBullet> shoot() {
         List<BaseBullet> res = new LinkedList<>();
         int x = this.getLocationX();
-        int y = this.getLocationY() + elite_direction*2;
+        int y = this.getLocationY() + eLiteDirection*2;
         int speedX = 0;
-        int speedY = this.getSpeedY() + elite_direction*5;
+        int speedY = this.getSpeedY() + eLiteDirection*5;
         BaseBullet basebullet;
-        for(int i=0; i<elite_shootNum; i++){
+        for(int i=0; i<eliteShootNum; i++){
             // 子弹发射位置相对飞机位置向前偏移
             // 多个子弹横向分散
-            basebullet = new EnemyBullet(x + (i*2 - elite_shootNum + 1)*10, y, speedX, speedY, elite_power);
+            basebullet = new EnemyBullet(x + (i*2 - eliteShootNum + 1)*10, y, speedX, speedY, elitePower);
             res.add(basebullet);
         }
         return res;

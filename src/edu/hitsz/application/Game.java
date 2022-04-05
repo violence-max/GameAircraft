@@ -220,8 +220,8 @@ public class Game extends JPanel {
         int speedX = 0;
         int speedY = enemyaircraft.getSpeedY();
 
-        PropFactory hppropfactory;
-        PropProduct hppropproduct;
+        AbstractPropFactory hppropfactory;
+        AbstractPropProduct hppropproduct;
 
         hppropfactory = new CreatHpProp();
         hppropproduct= hppropfactory.creatPropProduct(x,y,speedX,speedY);
@@ -234,8 +234,8 @@ public class Game extends JPanel {
         int speedX = 0;
         int speedY = enemyaircraft.getSpeedY();
 
-        PropFactory firepropfactory;
-        PropProduct firepropproduct;
+        AbstractPropFactory firepropfactory;
+        AbstractPropProduct firepropproduct;
 
         firepropfactory = new CreatFireProp();
         firepropproduct= firepropfactory.creatPropProduct(x,y,speedX,speedY);
@@ -248,8 +248,8 @@ public class Game extends JPanel {
         int speedX = 0;
         int speedY = enemyaircraft.getSpeedY();
 
-        PropFactory boompropfactory;
-        PropProduct boompropproduct;
+        AbstractPropFactory boompropfactory;
+        AbstractPropProduct boompropproduct;
 
         boompropfactory = new CreatBoomProp();
         boompropproduct= boompropfactory.creatPropProduct(x,y,speedX,speedY);

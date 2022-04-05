@@ -5,8 +5,8 @@ import edu.hitsz.enemyfactory.CreatEliteEnemy;
 import edu.hitsz.enemyfactory.EnemyAircraftFactory;
 import edu.hitsz.enemyfactory.EnemyAircraftProduct;
 import edu.hitsz.propfactory.CreatFireProp;
-import edu.hitsz.propfactory.PropFactory;
-import edu.hitsz.propfactory.PropProduct;
+import edu.hitsz.propfactory.AbstractPropFactory;
+import edu.hitsz.propfactory.AbstractPropProduct;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -34,8 +34,8 @@ class FirePropTest {
         int speedX = 0;
         int speedY = eliteenemy.getSpeedY();
 
-        PropFactory firepropfactory;
-        PropProduct firepropproduct;
+        AbstractPropFactory firepropfactory;
+        AbstractPropProduct firepropproduct;
 
         firepropfactory = new CreatFireProp();
         firepropproduct= firepropfactory.creatPropProduct(x,y,speedX,speedY);

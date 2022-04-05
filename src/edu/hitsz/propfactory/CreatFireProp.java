@@ -1,9 +1,9 @@
 package edu.hitsz.propfactory;
 
-public class CreatFireProp extends PropFactory {
+public class CreatFireProp extends AbstractPropFactory {
 
     @Override
-    public PropProduct creatPropProduct(int locationX, int locationY, int speedX, int speedY) {
+    public AbstractPropProduct creatPropProduct(int locationX, int locationY, int speedX, int speedY) {
         return new FirePropProduct(locationX,locationY,speedX,speedY);
     }
 }
