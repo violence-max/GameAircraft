@@ -107,10 +107,6 @@ public class Game extends JPanel {
                     else{
 
                         enemyAircrafts.add(feliteenemy);
-                        /**
-                         * 精英敌机射出子弹
-                         */
-                        enemyBullets.addAll(feliteenemy.shoot());
                     }
 
                 }
@@ -171,7 +167,11 @@ public class Game extends JPanel {
 
     private void shootAction() {
         // TODO 敌机射击
-        //代码写在了创建精英敌机处，更方便
+        for (AbstractAircraft enemyAircraft : enemyAircrafts){
+            if (enemyAircraft instanceof EliteEnemy){
+                enemyBullets.addAll(enemyAircraft.shoot());
+            }
+        }
         // 英雄射击
         heroBullets.addAll(heroAircraft.shoot());
     }
