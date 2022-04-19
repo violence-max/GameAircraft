@@ -63,7 +63,6 @@ public class Game extends JPanel {
 
     public Game() {
         heroAircraft = HeroAircraft.getheroaircraft();
-
         enemyAircrafts = new LinkedList<>();
         heroBullets = new LinkedList<>();
         enemyBullets = new LinkedList<>();
@@ -90,8 +89,9 @@ public class Game extends JPanel {
             /**
              * 创建精英敌机
              */
-            EliteEnemy feliteenemy = createliteenemy();
-            MobEnemy fmobenemy = creatmobenemy();
+            CreatEnemyAircrafts creatEnemyAircrafts = new CreatEnemyAircrafts();
+            EliteEnemy feliteenemy = creatEnemyAircrafts.createliteenemy();
+            MobEnemy fmobenemy = creatEnemyAircrafts.creatmobenemy();
 
             // 周期性执行（控制频率）
             if (timeCountAndNewCycleJudge()) {
@@ -168,23 +168,6 @@ public class Game extends JPanel {
         }
     }
 
-    private  EliteEnemy createliteenemy(){
-        EnemyAircraftFactory eliteenemyfactory;
-        EnemyAircraftProduct eliteenemyproduct;
-
-        eliteenemyfactory = new CreatEliteEnemy();
-        eliteenemyproduct = eliteenemyfactory.creatEnemyProduct();
-        return eliteenemyproduct.createliteenemy();
-    }
-
-    private  MobEnemy creatmobenemy(){
-        EnemyAircraftFactory mobenemyfactory;
-        EnemyAircraftProduct mobenemyproduct;
-
-        mobenemyfactory = new CreatMobeEnemy();
-        mobenemyproduct = mobenemyfactory.creatEnemyProduct();
-        return mobenemyproduct.creatmobenemy();
-    }
 
     private void shootAction() {
         // TODO 敌机射击
@@ -212,48 +195,6 @@ public class Game extends JPanel {
         for (AbstractAircraft enemyAircraft : enemyAircrafts) {
             enemyAircraft.forward();
         }
-    }
-
-    private HpProp creathpprop(AbstractAircraft enemyaircraft) {
-        int x = enemyaircraft.getLocationX();
-        int y = enemyaircraft.getLocationY();
-        int speedX = 0;
-        int speedY = enemyaircraft.getSpeedY();
-
-        AbstractPropFactory hppropfactory;
-        AbstractPropProduct hppropproduct;
-
-        hppropfactory = new CreatHpProp();
-        hppropproduct= hppropfactory.creatPropProduct(x,y,speedX,speedY);
-        return hppropproduct.creathpprop(x,y,speedX,speedY);
-    }
-
-    private FireProp creatfireprop(AbstractAircraft enemyaircraft) {
-        int x = enemyaircraft.getLocationX();
-        int y = enemyaircraft.getLocationY();
-        int speedX = 0;
-        int speedY = enemyaircraft.getSpeedY();
-
-        AbstractPropFactory firepropfactory;
-        AbstractPropProduct firepropproduct;
-
-        firepropfactory = new CreatFireProp();
-        firepropproduct= firepropfactory.creatPropProduct(x,y,speedX,speedY);
-        return firepropproduct.creatfireprop(x,y,speedX,speedY);
-    }
-
-    private BoomProp creatboomprop(AbstractAircraft enemyaircraft) {
-        int x = enemyaircraft.getLocationX();
-        int y = enemyaircraft.getLocationY();
-        int speedX = 0;
-        int speedY = enemyaircraft.getSpeedY();
-
-        AbstractPropFactory boompropfactory;
-        AbstractPropProduct boompropproduct;
-
-        boompropfactory = new CreatBoomProp();
-        boompropproduct= boompropfactory.creatPropProduct(x,y,speedX,speedY);
-        return boompropproduct.creatboomprop(x,y,speedX,speedY);
     }
 
     /**
@@ -294,21 +235,22 @@ public class Game extends JPanel {
                     bullet.vanish();
                     if (enemyAircraft.notValid()) {
                         // TODO 获得分数，产生道具补给
+                        CreatProps creatProps = new CreatProps();
                         if(enemyAircraft instanceof EliteEnemy){
                             temp2 = r.nextInt(4);
                             if (temp2 == 0){
                                 //产生恢复hp道具
-                                HpProp hp = creathpprop(enemyAircraft);
+                                HpProp hp = creatProps.creathpprop(enemyAircraft);
                                 props.add(hp);
                             }
                             //产生增强火力道具
                             else if(temp2 == 1){
-                                FireProp fire = creatfireprop(enemyAircraft);
+                                FireProp fire = creatProps.creatfireprop(enemyAircraft);
                                 props.add(fire);
                             }
                             //产生炸弹道具
                             else if(temp2 == 2){
-                                BoomProp boom = creatboomprop(enemyAircraft);
+                                BoomProp boom = creatProps.creatboomprop(enemyAircraft);
                                 props.add(boom);
                             }else{
                                 ;
