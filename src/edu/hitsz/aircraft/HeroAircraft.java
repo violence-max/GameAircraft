@@ -15,10 +15,6 @@ import java.util.List;
  */
 public class HeroAircraft extends AbstractAircraft {
 
-    /** 攻击方式 */
-    private int shootNum = 1;     //子弹一次发射数量
-    private int power = 30;       //子弹伤害
-    private int direction = -1;  //子弹射击方向 (向上发射：-1，向下发射：1)
 
     //创建唯一英雄机
     public static HeroAircraft heroAircraft = new HeroAircraft(
@@ -59,19 +55,7 @@ public class HeroAircraft extends AbstractAircraft {
      * @return 射击出的子弹List
      */
     public List<BaseBullet> shoot() {
-        List<BaseBullet> res = new LinkedList<>();
-        int x = this.getLocationX();
-        int y = this.getLocationY() + direction*2;
-        int speedX = 0;
-        int speedY = this.getSpeedY() + direction*5;
-        BaseBullet basebullet;
-        for(int i=0; i<shootNum; i++){
-            // 子弹发射位置相对飞机位置向前偏移
-            // 多个子弹横向分散
-            basebullet = new HeroBullet(x + (i*2 - shootNum + 1)*10, y, speedX, speedY, power);
-            res.add(basebullet);
-        }
-        return res;
+        return new LinkedList<>();
     }
 
 }

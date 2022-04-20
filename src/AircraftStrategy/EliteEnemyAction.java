@@ -14,10 +14,7 @@ public class EliteEnemyAction implements EnemyAircraftActionStrategy{
     private int elitePower = 50;       //子弹伤害
     private int eLiteDirection = 1;  //子弹射击方向 (向上发射：-1，向下发射：1)
 
-    /**
-     * 通过射击产生子弹
-     * @return 射击出的子弹List
-     */
+
 
     private AbstractAircraft eliteEnemy;
 
@@ -25,6 +22,10 @@ public class EliteEnemyAction implements EnemyAircraftActionStrategy{
         this.eliteEnemy = eliteenemy;
     }
 
+    /**
+     * 通过射击产生子弹
+     * @return 射击出的子弹List
+     */
     @Override
     public List<BaseBullet> shoot() {
         List<BaseBullet> res = new LinkedList<>();

@@ -18,6 +18,10 @@ public class BossEnemyAction implements EnemyAircraftActionStrategy{
         this.bossEnemy = bossenemy;
     }
 
+    /**
+     * 通过射击产生子弹
+     * @return 射击出的子弹List
+     */
     @Override
     public List<BaseBullet> shoot() {
         List<BaseBullet> res = new LinkedList<>();

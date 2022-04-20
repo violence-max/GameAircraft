@@ -5,12 +5,22 @@ import edu.hitsz.bullet.BaseBullet;
 import java.util.List;
 
 public class Context {
-    private EnemyAircraftActionStrategy strategy;
-    public void setStrategy(EnemyAircraftActionStrategy strategy){
-        this.strategy = strategy;
+    private EnemyAircraftActionStrategy enemystrategy;
+    private HeroAircraftActionStrategy herostrategy;
+    public void setEnemyStrategy(EnemyAircraftActionStrategy strategy){
+        this.enemystrategy = strategy;
+    }
+    public void setHerostrategy(HeroAircraftActionStrategy herostrategy){this.herostrategy = herostrategy;}
+
+    public List<BaseBullet> excuteEnemyShootAction(){
+        return enemystrategy.shoot();
     }
 
-    public List<BaseBullet> excuteShootAction(){
-        return strategy.shoot();
+    public List<BaseBullet> excuteHeroShootActionDirectely(){
+        return herostrategy.shootDirrectely();
+    }
+
+    public List<BaseBullet> excuteHeroShootActionScattering(){
+        return herostrategy.shootScattring();
     }
 }

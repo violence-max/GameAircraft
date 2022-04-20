@@ -67,6 +67,11 @@ public class Game extends JPanel {
     StrategeAction enemyStrategy = new StrategeAction();
 
     /**
+     * 创建英雄机执行行为的策略
+     */
+    StrategeAction heroStrategy = new StrategeAction();
+
+    /**
      * 布尔类型的判断标志，用于判断boss敌机是否已经存在
      */
     private boolean bossisexitflag = true;
@@ -205,7 +210,7 @@ public class Game extends JPanel {
             }
         }
         // 英雄射击
-        heroBullets.addAll(heroAircraft.shoot());
+        heroBullets.addAll(heroStrategy.HeroAircraftStrategyDierectely(heroAircraft));
     }
 
     private void bulletsMoveAction() {
