@@ -74,9 +74,11 @@ public class Game extends JPanel {
     //作为火力道具是否生效的判定标志
 
     /**
-     * 布尔类型的判断标志，用于判断boss敌机是否已经存在
+     * bossisexitflag为布尔类型的判断标志，用于判断boss敌机是否已经存在
+     * fscore为记录上一次boss敌机出现时的得分，初始值设置为0
      */
-    private boolean bossisexitflag = true;
+    private boolean bossisexitflag;
+    private int fscore = 0;
 
 
     public Game() {
@@ -127,21 +129,19 @@ public class Game extends JPanel {
                         enemyAircrafts.add(feliteenemy);
                     }
 
-                    if ((time % 120000 == 0)){
-                        /**
-                         * 每两分钟产生一架boss敌机，但不能同时产生两架boss敌机
-                         */
-                        for(AbstractAircraft enemyAirccraft : enemyAircrafts){
-                            if (enemyAirccraft instanceof BossEnemy){
-                                bossisexitflag = false;
-                            }
-                        }
-
-                        if (bossisexitflag){
-                            enemyAircrafts.add(fbossenmey);
-                        }
+                    /**
+                     * 每得3000分出现一架boss敌机
+                     */
+                    if ((score - fscore >= 3000)){
+                        bossisexitflag = true;
                     }
 
+                    if (bossisexitflag){
+                        enemyAircrafts.add(fbossenmey);
+                        bossisexitflag = false;
+                        fscore = score;
+                        //记录上一次boss敌机出现时的得分
+                    }
                 }
                 // 飞机射出子弹
                 shootAction();
