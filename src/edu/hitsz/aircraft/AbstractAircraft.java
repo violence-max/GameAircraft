@@ -21,13 +21,13 @@ public abstract class AbstractAircraft extends AbstrcatFlyingObject {
     public AbstractAircraft(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY);
         this.hp = hp;
-        this.maxHp = hp;
+        this.maxHp = hp*10;
     }
 
     public void decreaseHp(int decrease){
         hp -= decrease;
         if(hp >= maxHp){
-            hp = 100;
+            hp = 1000;
         }
         if(hp <= 0){
             hp=0;
