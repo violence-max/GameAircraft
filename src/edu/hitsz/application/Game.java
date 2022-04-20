@@ -64,12 +64,14 @@ public class Game extends JPanel {
     /**
      * 创建敌机执行行为的策略
      */
-    StrategeAction enemyStrategy = new StrategeAction();
+    private StrategeAction enemyStrategy = new StrategeAction();
 
     /**
      * 创建英雄机执行行为的策略
      */
-    StrategeAction heroStrategy = new StrategeAction();
+    private StrategeAction heroStrategy = new StrategeAction();
+    private boolean fireFlag = false;
+    //作为火力道具是否生效的判定标志
 
     /**
      * 布尔类型的判断标志，用于判断boss敌机是否已经存在
@@ -210,7 +212,12 @@ public class Game extends JPanel {
             }
         }
         // 英雄射击
-        heroBullets.addAll(heroStrategy.HeroAircraftStrategyDierectely(heroAircraft));
+        if (fireFlag == false){
+            heroBullets.addAll(heroStrategy.HeroAircraftStrategyDierectely(heroAircraft));
+        }
+        else{
+            heroBullets.addAll(heroStrategy.HeroAircraftStrategyScattering(heroAircraft));
+        }
     }
 
     private void bulletsMoveAction() {
@@ -327,7 +334,8 @@ public class Game extends JPanel {
                 }else if(prop instanceof BoomProp){
                     ((BoomProp) prop).boom();
                 }else if(prop instanceof FireProp){
-                    ((FireProp) prop).fire();
+                    ((FireProp) prop).fire(heroAircraft,heroBullets);
+                    fireFlag = true;
                 }else{
                     ;
                 }
