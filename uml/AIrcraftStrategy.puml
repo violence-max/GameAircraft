@@ -1,0 +1,55 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface EnemyAIrcraftActioinStrategy{
+    +List<BaseBullet> shoot()
+}
+
+class MobEnemyAction{
+    - mobEnemy:AbstractAircraft
+    + setMobEnemy:void
+    + shoot():List<BaseBullet>
+}
+
+class EliteEnemyAction{
+    - eliteShootNum:int
+    - eliteDirection:int
+    - elitePower:int
+    - eliteEnemy:AbstractAircraft
+    + setEliteEnemy():void
+    + shoot():List<BaseBullet>
+}
+
+class BossEnemyAction{
+    - eliteShootNum:int
+    - eliteDirection:int
+    - elitePower:int
+    - bossEnemy:AbstractAircraft
+    + setBossEnemy():void
+    + shoot():List<BaseBullet>
+}
+
+EnemyAIrcraftActioinStrategy <|.. BossEnemyAction
+EnemyAIrcraftActioinStrategy <|.. EliteEnemyAction
+EnemyAIrcraftActioinStrategy <|.. MobEnemyAction
+
+class Context{
+    + strategy:EnemyAIrcraftActioinStrategy
+    + setStrategy:void
+    + excuteShootAction:List<BaseBullet>
+}
+
+EnemyAIrcraftActioinStrategy o-- Context
+
+class StrategyAction{
+    - strategy:Context
+    - eliteEnemyAction:EliteEnemyAction
+    - mobEnemyAction:MobEnemyAction
+    - bossEnemyAction:BossEnemyAction
+    + EliteEnemyShootStrategy(AbstractAircraft aircraft):List<BaseBullet>
+    + MobEnemyShootStrategy(AbstractAircraft aircraft)):List<BaseBullet>
+    +BossEnemyShootStrategy(AbstractAircraft aircraft)):List<BaseBullet>
+}
+
+Context <.. StrategyAction
+@enduml

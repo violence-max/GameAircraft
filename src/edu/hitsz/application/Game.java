@@ -1,5 +1,6 @@
 package edu.hitsz.application;
 
+import AircraftStrategy.StrategeAction;
 import edu.hitsz.Prop.*;
 import edu.hitsz.aircraft.*;
 import edu.hitsz.bullet.BaseBullet;
@@ -59,6 +60,11 @@ public class Game extends JPanel {
     Random r = new Random();
     private int temp1;
     private int temp2;
+
+    /**
+     * 创建敌机执行行为的策略
+     */
+    StrategeAction enemyStrategy = new StrategeAction();
 
     /**
      * 布尔类型的判断标志，用于判断boss敌机是否已经存在
@@ -189,7 +195,13 @@ public class Game extends JPanel {
         // TODO 敌机射击
         for (AbstractAircraft enemyAircraft : enemyAircrafts){
             if (enemyAircraft instanceof EliteEnemy){
-                enemyBullets.addAll(enemyAircraft.shoot());
+                enemyBullets.addAll(enemyStrategy.EliteEnemyShootStrategy(enemyAircraft));
+            }
+            else if (enemyAircraft instanceof BossEnemy){
+                enemyBullets.addAll(enemyStrategy.BossEnemyShootStrategy(enemyAircraft));
+            }
+            else{
+                enemyBullets.addAll(enemyStrategy.MobEnemyShootStrategy(enemyAircraft));
             }
         }
         // 英雄射击
