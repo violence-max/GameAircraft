@@ -52,4 +52,22 @@ class StrategyAction{
 }
 
 Context <.. StrategyAction
+
+class HeroAircraftActioin{
+    - eliteShootNum:int
+    - eliteDirection:int
+    - elitePower:int
+    - heroAircraft:HeroAircraft
+    + setHeroAircraft(HeroAircraft heroAircraft):void
+    + shootDirectely():List<BaseBullet>
+    + shootScattering():List<BaseBullet>
+}
+
+interface HeroAircraftActionStrategy{
+    + shootDirectely():List<BaseBullet>
+    + shootScattering():List<BaseBullet>
+}
+
+HeroAircraftActionStrategy <|.. HeroAircraftActioin
+HeroAircraftActionStrategy o-- Context
 @enduml

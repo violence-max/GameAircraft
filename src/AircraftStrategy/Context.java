@@ -21,6 +21,6 @@ public class Context {
     }
 
     public List<BaseBullet> excuteHeroShootActionScattering(){
-        return herostrategy.shootScattring();
+        return herostrategy.shootScattering();
     }
 }

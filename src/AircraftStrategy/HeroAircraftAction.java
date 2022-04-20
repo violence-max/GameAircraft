@@ -2,7 +2,6 @@ package AircraftStrategy;
 
 import edu.hitsz.aircraft.HeroAircraft;
 import edu.hitsz.bullet.BaseBullet;
-import edu.hitsz.bullet.EnemyBullet;
 import edu.hitsz.bullet.HeroBullet;
 
 import java.util.LinkedList;
@@ -45,8 +44,7 @@ public class HeroAircraftAction implements HeroAircraftActionStrategy{
      * 产生散射子弹，并且子弹数量增加
      * @return 射击出的子弹List
      */
-    @Override
-    public List<BaseBullet> shootScattring() {
+    public List<BaseBullet> shootScattering() {
         eliteShootNum = 4;
         //子弹数量增加
 
