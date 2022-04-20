@@ -256,7 +256,7 @@ public class Game extends JPanel {
                     if (enemyAircraft.notValid()) {
                         // TODO 获得分数，产生道具补给
                         CreatProps creatProps = new CreatProps();
-                        if(enemyAircraft instanceof EliteEnemy){
+                        if(enemyAircraft instanceof EliteEnemy || enemyAircraft instanceof BossEnemy){
                             temp2 = r.nextInt(4);
                             if (temp2 == 0){
                                 //产生恢复hp道具
@@ -276,7 +276,21 @@ public class Game extends JPanel {
                                 ;
                             }
                         }
-                        score += 10;
+
+                        /**
+                         * 消灭普通敌机加10分
+                         * 消灭精英敌机加20分
+                         * 消灭boss敌机加200分
+                         */
+                        if (enemyAircraft instanceof MobEnemy){
+                            score += 10;
+                        }
+                        else if (enemyAircraft instanceof  EliteEnemy){
+                            score += 20;
+                        }
+                        else{
+                            score += 200;
+                        }
                     }
                 }
                 // 英雄机 与 敌机 相撞，均损毁
