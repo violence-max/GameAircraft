@@ -39,7 +39,7 @@ public class Game extends JPanel {
     private final List<BaseBullet> enemyBullets;
     private final List<AbstractProp> props;
 
-    private int enemyMaxNumber = 5;
+    private int enemyMaxNumber = 6;
 
     private boolean gameOverFlag = false;
     private int score = 0;
@@ -59,6 +59,11 @@ public class Game extends JPanel {
     Random r = new Random();
     private int temp1;
     private int temp2;
+
+    /**
+     * 布尔类型的判断标志，用于判断boss敌机是否已经存在
+     */
+    private boolean bossisexitflag = true;
 
 
     public Game() {
@@ -87,17 +92,18 @@ public class Game extends JPanel {
             time += timeInterval;
 
             /**
-             * 创建精英敌机
+             * 创建精英敌机，普通敌机和boss敌机
              */
             CreatEnemyAircrafts creatEnemyAircrafts = new CreatEnemyAircrafts();
             EliteEnemy feliteenemy = creatEnemyAircrafts.createliteenemy();
             MobEnemy fmobenemy = creatEnemyAircrafts.creatmobenemy();
+            BossEnemy fbossenmey = creatEnemyAircrafts.creatbossenemy();
 
             // 周期性执行（控制频率）
             if (timeCountAndNewCycleJudge()) {
                 temp1 = r.nextInt(2);
                 System.out.println(time);
-                // 敌机产生
+                // 普通敌机，精英敌机和boss敌机产生
                 if (enemyAircrafts.size() < enemyMaxNumber) {
                     //普通敌机
                     if(temp1 == 0){
@@ -105,8 +111,22 @@ public class Game extends JPanel {
                     }
                     //精英敌机
                     else{
-
                         enemyAircrafts.add(feliteenemy);
+                    }
+
+                    if ((time % 120000 == 0)){
+                        /**
+                         * 每两分钟产生一架boss敌机，但不能同时产生两架boss敌机
+                         */
+                        for(AbstractAircraft enemyAirccraft : enemyAircrafts){
+                            if (enemyAirccraft instanceof BossEnemy){
+                                bossisexitflag = false;
+                            }
+                        }
+
+                        if (bossisexitflag){
+                            enemyAircrafts.add(fbossenmey);
+                        }
                     }
 
                 }
