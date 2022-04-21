@@ -1,6 +1,7 @@
 package edu.hitsz.application;
 
-import AircraftStrategy.StrategeAction;
+import edu.hitsz.AircraftStrategy.StrategeAction;
+import edu.hitsz.ScorceData.DataPatternDemo;
 import edu.hitsz.Prop.*;
 import edu.hitsz.aircraft.*;
 import edu.hitsz.bullet.BaseBullet;
@@ -70,8 +71,8 @@ public class Game extends JPanel {
      * 创建英雄机执行行为的策略
      */
     private StrategeAction heroStrategy = new StrategeAction();
-    private boolean fireFlag = false;
     //作为火力道具是否生效的判定标志
+    private boolean fireFlag = false;
 
     /**
      * bossisexitflag为布尔类型的判断标志，用于判断boss敌机是否已经存在
@@ -79,6 +80,14 @@ public class Game extends JPanel {
      */
     private boolean bossisexitflag;
     private int fscore = 0;
+
+
+    /**
+     * 构建一个访问数据对象
+     */
+    DataPatternDemo dataPatternDemo = new DataPatternDemo();
+
+
 
 
     public Game() {
@@ -106,26 +115,22 @@ public class Game extends JPanel {
 
             time += timeInterval;
 
-            /**
-             * 创建精英敌机，普通敌机和boss敌机
-             */
-            CreatEnemyAircrafts creatEnemyAircrafts = new CreatEnemyAircrafts();
-            EliteEnemy feliteenemy = creatEnemyAircrafts.createliteenemy();
-            MobEnemy fmobenemy = creatEnemyAircrafts.creatmobenemy();
-            BossEnemy fbossenmey = creatEnemyAircrafts.creatbossenemy();
 
             // 周期性执行（控制频率）
             if (timeCountAndNewCycleJudge()) {
                 temp1 = r.nextInt(2);
                 System.out.println(time);
                 // 普通敌机，精英敌机和boss敌机产生
+                CreatEnemyAircrafts creatEnemyAircrafts = new CreatEnemyAircrafts();
                 if (enemyAircrafts.size() < enemyMaxNumber) {
                     //普通敌机
                     if(temp1 == 0){
+                        MobEnemy fmobenemy = creatEnemyAircrafts.creatmobenemy();
                         enemyAircrafts.add(fmobenemy);
                     }
                     //精英敌机
                     else{
+                        EliteEnemy feliteenemy = creatEnemyAircrafts.createliteenemy();
                         enemyAircrafts.add(feliteenemy);
                     }
 
@@ -137,6 +142,7 @@ public class Game extends JPanel {
                     }
 
                     if (bossisexitflag){
+                        BossEnemy fbossenmey = creatEnemyAircrafts.creatbossenemy();
                         enemyAircrafts.add(fbossenmey);
                         bossisexitflag = false;
                         fscore = score;
@@ -166,10 +172,36 @@ public class Game extends JPanel {
 
             // 游戏结束检查
             if (heroAircraft.getHp() <= 0) {
+
+                //如果文件不存在则创建文件
+                dataPatternDemo.fileCreat();
+                //将文件中的数据拷贝出来
+                dataPatternDemo.fileCopy();
+                //获取游戏分数
+                dataPatternDemo.setScore(score);
+                //获取当前月份
+                dataPatternDemo.setMonth();
+                //获取当前日
+                dataPatternDemo.setDay();
+                //获取当前小时
+                dataPatternDemo.setHour();
+                //获取当前分钟
+                dataPatternDemo.setMinute();
+                //添加数据
+                dataPatternDemo.addData();
+                //对数据进行排序
+                dataPatternDemo.sort();
+                //向文件写入数据
+                dataPatternDemo.fileWrite();
+                //输出文件内容
+                dataPatternDemo.fileRead();
+
                 // 游戏结束
                 executorService.shutdown();
                 gameOverFlag = true;
                 System.out.println("Game Over!");
+
+
             }
 
         };

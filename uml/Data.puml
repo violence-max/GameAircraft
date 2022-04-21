@@ -1,0 +1,78 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface DataDao{
+    + sortData():void
+    + doAdd(int score, int month, int day, int hour, int minute):void
+    + creatFile():void
+    + fileWriter():void
+    + fileReader():void
+    + fileCopy():void
+    + getMonth():int
+    + getDay():int
+    + getHour():int
+    + getMinute():int
+}
+
+class DataDaoimpi{
+    - dataTable:LinkedLIst<Data>()
+    - file:File
+    - readOnlyFile:File
+    + DataDaoimpi()
+    + sortData():void
+    + doAdd(int score, int month, int day, int hour, int minute):void
+    + creatFile():void
+    + fileWriter():void
+    + fileReader():void
+    + fileCopy():void
+    + getMonth():int
+    + getDay():int
+    + getHour():int
+    + getMinute():int
+}
+
+DataDao <|.. DataDaoimpi
+
+class Data{
+    - dataId:int
+    - userName:String
+    - score:int
+    - month:int
+    - day:int
+    - hour:int
+    - minute:int
+    + setMinute():void
+    + getDataId():int
+    + getScore():int
+    + getMonth():int
+    + getDay():int
+    + getHour():int
+    + getMinute():int
+}
+
+Data <-- DataDaoimpi
+
+class DataPattrenDemo{
+    - dataId:int
+    - score:int
+    - month:int
+    - day:int
+    - hour:int
+    - minute:int
+    + DataPattrenDemo()
+    + setDataId():void
+    + setScore():void
+    + setMonth():void
+    + setDay():void
+    + setHour():void
+    + addData():void
+    + sort():void
+    + fileCreat():void
+    + fileWrite():void
+    + fileRead():void
+    + fileCopy():void
+}
+
+DataDao <.. DataPattrenDemo
+
+@enduml

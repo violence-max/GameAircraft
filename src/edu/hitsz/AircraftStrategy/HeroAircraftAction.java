@@ -1,4 +1,4 @@
-package AircraftStrategy;
+package edu.hitsz.AircraftStrategy;
 
 import edu.hitsz.aircraft.HeroAircraft;
 import edu.hitsz.bullet.BaseBullet;

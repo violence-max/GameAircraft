@@ -1,6 +1,6 @@
 package edu.hitsz.Prop;
 
-import AircraftStrategy.StrategeAction;
+import edu.hitsz.AircraftStrategy.StrategeAction;
 import edu.hitsz.aircraft.HeroAircraft;
 import edu.hitsz.bullet.BaseBullet;
 
