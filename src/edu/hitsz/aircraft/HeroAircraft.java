@@ -1,6 +1,8 @@
 package edu.hitsz.aircraft;
 
 
+import edu.hitsz.AircraftStrategy.HeroAircraftShoot;
+import edu.hitsz.AircraftStrategy.HeroAircraftShootStrategy;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.BaseBullet;
@@ -22,6 +24,10 @@ public class HeroAircraft extends AbstractAircraft {
             Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
             0, 0, 1000);
 
+    private HeroAircraftShootStrategy heroAircraftShoot = new HeroAircraftShoot();
+    private HeroAircraftShootStrategy strategy = heroAircraftShoot;
+
+
     /**
      * @param locationX 英雄机位置x坐标
      * @param locationY 英雄机位置y坐标
@@ -31,6 +37,10 @@ public class HeroAircraft extends AbstractAircraft {
      */
     private HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
+    }
+
+    public void setStrategy(HeroAircraftShootStrategy strategy) {
+        this.strategy = strategy;
     }
 
     //lazy方式
@@ -55,7 +65,7 @@ public class HeroAircraft extends AbstractAircraft {
      * @return 射击出的子弹List
      */
     public List<BaseBullet> shoot() {
-        return new LinkedList<>();
+        return strategy.shoot(heroAircraft);
     }
 
 }

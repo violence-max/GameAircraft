@@ -1,5 +1,7 @@
 package edu.hitsz.aircraft;
 
+import edu.hitsz.AircraftStrategy.EnemyAircraftShootStrategy;
+import edu.hitsz.AircraftStrategy.MobEnemyShoot;
 import edu.hitsz.application.Game;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
@@ -20,6 +22,14 @@ public class MobEnemy extends AbstractAircraft {
         super(locationX, locationY, speedX, speedY, hp);
     }
 
+    private EnemyAircraftShootStrategy mobEnemyShootStrategy = new MobEnemyShoot();
+    private EnemyAircraftShootStrategy strategy = mobEnemyShootStrategy;
+    private AbstractAircraft mobEnemy;
+
+    public void setMobEnemy(AbstractAircraft mobEnemy) {
+        this.mobEnemy = mobEnemy;
+    }
+
     @Override
     public void forward() {
         super.forward();
@@ -31,7 +41,7 @@ public class MobEnemy extends AbstractAircraft {
 
     @Override
     public List<BaseBullet> shoot() {
-        return new LinkedList<>();
+        return strategy.shoot(mobEnemy);
     }
 }
 

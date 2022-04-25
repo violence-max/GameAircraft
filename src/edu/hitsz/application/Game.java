@@ -1,6 +1,6 @@
 package edu.hitsz.application;
 
-import edu.hitsz.AircraftStrategy.StrategeAction;
+import edu.hitsz.AircraftStrategy.*;
 import edu.hitsz.ScorceData.DataPatternDemo;
 import edu.hitsz.Prop.*;
 import edu.hitsz.aircraft.*;
@@ -62,17 +62,7 @@ public class Game extends JPanel {
     private int temp1;
     private int temp2;
 
-    /**
-     * 创建敌机执行行为的策略
-     */
-    private StrategeAction enemyStrategy = new StrategeAction();
 
-    /**
-     * 创建英雄机执行行为的策略
-     */
-    private StrategeAction heroStrategy = new StrategeAction();
-    //作为火力道具是否生效的判定标志
-    private boolean fireFlag = false;
 
     /**
      * bossisexitflag为布尔类型的判断标志，用于判断boss敌机是否已经存在
@@ -85,8 +75,12 @@ public class Game extends JPanel {
     /**
      * 构建一个访问数据对象
      */
-    DataPatternDemo dataPatternDemo = new DataPatternDemo();
+    private DataPatternDemo dataPatternDemo = new DataPatternDemo();
 
+    /**
+     * 创建敌机的对象
+     */
+    private CreatEnemyAircrafts creatEnemyAircrafts = new CreatEnemyAircrafts();
 
 
 
@@ -103,7 +97,10 @@ public class Game extends JPanel {
         //启动英雄机鼠标监听
         new HeroController(this, heroAircraft);
 
+
     }
+
+
 
     /**
      * 游戏启动入口，执行游戏逻辑
@@ -115,13 +112,11 @@ public class Game extends JPanel {
 
             time += timeInterval;
 
-
             // 周期性执行（控制频率）
             if (timeCountAndNewCycleJudge()) {
                 temp1 = r.nextInt(2);
                 System.out.println(time);
                 // 普通敌机，精英敌机和boss敌机产生
-                CreatEnemyAircrafts creatEnemyAircrafts = new CreatEnemyAircrafts();
                 if (enemyAircrafts.size() < enemyMaxNumber) {
                     //普通敌机
                     if(temp1 == 0){
@@ -191,7 +186,7 @@ public class Game extends JPanel {
                 dataPatternDemo.addData();
                 //对数据进行排序
                 dataPatternDemo.sort();
-                //向文件写入数据
+                //向数据写入文件
                 dataPatternDemo.fileWrite();
                 //输出文件内容
                 dataPatternDemo.fileRead();
@@ -214,6 +209,8 @@ public class Game extends JPanel {
 
     }
 
+
+
     //***********************
     //      Action 各部分
     //***********************
@@ -234,22 +231,20 @@ public class Game extends JPanel {
         // TODO 敌机射击
         for (AbstractAircraft enemyAircraft : enemyAircrafts){
             if (enemyAircraft instanceof EliteEnemy){
-                enemyBullets.addAll(enemyStrategy.EliteEnemyShootStrategy(enemyAircraft));
+                ((EliteEnemy) enemyAircraft).setEnemyAircraft(enemyAircraft);
+                enemyBullets.addAll(enemyAircraft.shoot());
             }
             else if (enemyAircraft instanceof BossEnemy){
-                enemyBullets.addAll(enemyStrategy.BossEnemyShootStrategy(enemyAircraft));
+                ((BossEnemy) enemyAircraft).setBossEnemy(enemyAircraft);
+                enemyBullets.addAll(enemyAircraft.shoot());
             }
-            else{
-                enemyBullets.addAll(enemyStrategy.MobEnemyShootStrategy(enemyAircraft));
+            else if(enemyAircraft instanceof MobEnemy){
+                ((MobEnemy) enemyAircraft).setMobEnemy(enemyAircraft);
+                enemyBullets.addAll(enemyAircraft.shoot());
             }
         }
         // 英雄射击
-        if (fireFlag == false){
-            heroBullets.addAll(heroStrategy.HeroAircraftStrategyDierectely(heroAircraft));
-        }
-        else{
-            heroBullets.addAll(heroStrategy.HeroAircraftStrategyScattering(heroAircraft));
-        }
+            heroBullets.addAll(heroAircraft.shoot());
     }
 
     private void bulletsMoveAction() {
@@ -366,8 +361,7 @@ public class Game extends JPanel {
                 }else if(prop instanceof BoomProp){
                     ((BoomProp) prop).boom();
                 }else if(prop instanceof FireProp){
-                    ((FireProp) prop).fire(heroAircraft,heroBullets);
-                    fireFlag = true;
+                    ((FireProp) prop).fire(heroAircraft);
                 }else{
                     ;
                 }

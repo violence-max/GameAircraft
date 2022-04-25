@@ -1,5 +1,7 @@
 package edu.hitsz.aircraft;
 
+import edu.hitsz.AircraftStrategy.BossEnemyShoot;
+import edu.hitsz.AircraftStrategy.EnemyAircraftShootStrategy;
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.bullet.EnemyBullet;
@@ -10,6 +12,14 @@ import java.util.List;
 public class BossEnemy extends AbstractAircraft {
     public BossEnemy(int locationX,int locationY,int speddX,int speedY,int hp){
         super(locationX,locationY,speddX,speedY,hp);
+    }
+
+    private EnemyAircraftShootStrategy bossEnemyShottStrategy = new BossEnemyShoot();
+    private EnemyAircraftShootStrategy strategy = bossEnemyShottStrategy;
+    private AbstractAircraft bossEnemy;
+
+    public void setBossEnemy(AbstractAircraft bossEnemy) {
+        this.bossEnemy = bossEnemy;
     }
 
     @Override
@@ -23,7 +33,7 @@ public class BossEnemy extends AbstractAircraft {
 
     @Override
     public List<BaseBullet> shoot() {
-        return new LinkedList<>();
+        return strategy.shoot(bossEnemy);
     }
 
 

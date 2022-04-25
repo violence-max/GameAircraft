@@ -1,5 +1,7 @@
 package edu.hitsz.aircraft;
 
+import edu.hitsz.AircraftStrategy.EliteEnemyShoot;
+import edu.hitsz.AircraftStrategy.EnemyAircraftShootStrategy;
 import edu.hitsz.application.Game;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
@@ -21,6 +23,15 @@ public class EliteEnemy extends AbstractAircraft{
         super(locationX,locationY,speedX,speedY,hp);
     }
 
+    private EnemyAircraftShootStrategy eilteEnemyShootStrategy = new EliteEnemyShoot();
+    private EnemyAircraftShootStrategy strategy = eilteEnemyShootStrategy;
+    private AbstractAircraft enemyAircraft;
+
+
+    public void setEnemyAircraft(AbstractAircraft enemyAircraft) {
+        this.enemyAircraft = enemyAircraft;
+    }
+
     @Override
     public void forward() {
         super.forward();
@@ -36,6 +47,6 @@ public class EliteEnemy extends AbstractAircraft{
      * @return 射击出的子弹List
      */
     public List<BaseBullet> shoot() {
-        return new LinkedList<>();
+        return strategy.shoot(enemyAircraft);
     }
 }

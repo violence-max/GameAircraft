@@ -1,6 +1,7 @@
 package edu.hitsz.Prop;
 
-import edu.hitsz.AircraftStrategy.StrategeAction;
+import edu.hitsz.AircraftStrategy.HeroAircraftShootStrategy;
+import edu.hitsz.AircraftStrategy.HeroAircraftShootWithFire;
 import edu.hitsz.aircraft.HeroAircraft;
 import edu.hitsz.bullet.BaseBullet;
 
@@ -11,9 +12,11 @@ public class FireProp extends AbstractProp {
     public FireProp(int locationX, int locationY, int speedX, int speedY){
         super(locationX,locationY,speedX,speedY);
     }
+    private HeroAircraftShootStrategy heroAircraftShootWithFire = new HeroAircraftShootWithFire();
 
-    public void fire(HeroAircraft heroAircraft, List<BaseBullet> heroBullets){
-        StrategeAction heroStrategy = new StrategeAction();
-        heroBullets.addAll(heroStrategy.HeroAircraftStrategyScattering(heroAircraft));
+    public void fire(HeroAircraft heroAircraft){
+        heroAircraft.setStrategy(heroAircraftShootWithFire);
     }
+
+
 }
