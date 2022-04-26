@@ -15,10 +15,9 @@ public class FireProp extends AbstractProp {
     public FireProp(int locationX, int locationY, int speedX, int speedY){
         super(locationX,locationY,speedX,speedY);
     }
+
     private final HeroAircraftShootStrategy heroAircraftShootWithFire = new HeroAircraftShootWithFire();
     private final HeroAircraftShootStrategy heroAircraftShoot = new HeroAircraftShoot();
-
-
 
     /**
      * 线程池，用多线程实现火力道具
@@ -28,7 +27,8 @@ public class FireProp extends AbstractProp {
             1,
             1000,
             TimeUnit.MILLISECONDS,
-            new ArrayBlockingQueue<>(1)
+            new ArrayBlockingQueue<>(1),
+            r -> new Thread(r)
     );
 
     public void fire(HeroAircraft heroAircraft){
@@ -42,13 +42,14 @@ public class FireProp extends AbstractProp {
             //将英雄机的射击策略调整回直射
             heroAircraft.setStrategy(heroAircraftShoot);
         };
+        Thread fireThread = executorService.getThreadFactory().newThread(task);
         if (executorService.getTaskCount() == 0){
             //线程池中无线程则添加线程并执行
-            executorService.execute(task);
+            executorService.execute(fireThread);
         }else{
             //停止当前线程后立即开启新线程
             executorService.shutdown();
-            executorService.execute(task);
+            executorService.execute(fireThread);
         }
     }
 }

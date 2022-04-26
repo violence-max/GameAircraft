@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println("Hello Aircraft War");
-
+        
         // 获得屏幕的分辨率，初始化 Frame
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         JFrame frame = new JFrame("Aircraft War");
