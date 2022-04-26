@@ -22,11 +22,16 @@ public class MusicThread extends Thread {
     private String filename;
     private AudioFormat audioFormat;
     private byte[] samples;
+    private boolean flag = false;
 
     public MusicThread(String filename) {
         //初始化filename
         this.filename = filename;
         reverseMusic();
+    }
+
+    public void setFlag(boolean flag){
+        this.flag = flag;
     }
 
     public void reverseMusic() {
@@ -75,7 +80,7 @@ public class MusicThread extends Thread {
         dataLine.start();
         try {
             int numBytesRead = 0;
-            while (numBytesRead != -1) {
+            while (numBytesRead != -1 && flag) {
 				//从音频流读取指定的最大数量的数据字节，并将其放入缓冲区中
                 numBytesRead =
                         source.read(buffer, 0, buffer.length);

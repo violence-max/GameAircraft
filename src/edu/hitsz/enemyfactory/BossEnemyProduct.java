@@ -19,7 +19,7 @@ public class BossEnemyProduct implements EnemyAircraftProduct {
                 (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
                 2,
                 0,
-                3000
+                600
         );
     }
 
