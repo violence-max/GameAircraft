@@ -30,6 +30,5 @@ public class Main {
         frame.add(game);
         frame.setVisible(true);
         game.action();
-        System.out.println("***************************************");
     }
 }

@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface EnemyAIrcraftShootStrategy{
+    + shoot():List<BaseBullet>
+}
+
+class MobEnemyShoot{
+    + shoot():List<BaseBullet>
+}
+
+class EliteEnemyShoot{
+    - eliteShootNum:int
+    - eliteDirection:int
+    - elitePower:int
+    + shoot():List<BaseBullet>
+}
+
+class BossEnemyShoot{
+    - eliteShootNum:int
+    - eliteDirection:int
+    - elitePower:int
+    + shoot():List<BaseBullet>
+}
+
+class EliteEnemy{
+    - eliteEnemyShootStrategy:EnemyAIrcraftShootStrategy
+    - strategy:EnemyAIrcraftShootStrategy
+    + shoot():List<BaseBullet>
+}
+
+class BossEnemy{
+    - bossEnemyShootStrategy:EnemyAIrcraftShootStrategy
+    - strategy:EnemyAIrcraftShootStrategy
+    + shoot():List<BaseBullet>
+}
+
+class MobEnemy{
+    - mobEnemyShootStrategt:EnemyAIrcraftShootStrategy
+    - strategy:EnemyAIrcraftShootStrategy
+    + shoot():List<BaseBullet>
+}
+
+EnemyAIrcraftShootStrategy <|.. BossEnemyShoot
+EnemyAIrcraftShootStrategy <|.. EliteEnemyShoot
+EnemyAIrcraftShootStrategy <|.. MobEnemyShoot
+
+
+EnemyAIrcraftShootStrategy o-- EliteEnemy
+EnemyAIrcraftShootStrategy o-- BossEnemy
+EnemyAIrcraftShootStrategy o-- MobEnemy
+@enduml
