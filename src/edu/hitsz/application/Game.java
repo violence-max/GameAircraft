@@ -124,7 +124,7 @@ public class Game extends JPanel {
             // 周期性执行（控制频率）
             if (timeCountAndNewCycleJudge()) {
                 temp1 = r.nextInt(2);
-//                System.out.println(time);
+                System.out.println(time);
                 // 普通敌机，精英敌机和boss敌机产生
                 if (enemyAircrafts.size() < enemyMaxNumber) {
                     //普通敌机

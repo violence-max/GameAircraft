@@ -62,6 +62,14 @@ public class DataPatternDemo {
         return dateDao.getDataTable();
     }
 
+    public void setUserName(String userName){
+        dateDao.setUserName(userName);
+    }
+
+    public void removeByRank(int rank){
+        dateDao.removeByRank(rank);
+    }
+
     public void fileAction(int score){
         //若文件不存在则创建文件
         this.fileCreat();

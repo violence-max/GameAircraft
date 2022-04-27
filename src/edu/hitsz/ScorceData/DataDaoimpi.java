@@ -17,7 +17,7 @@ public class DataDaoimpi implements DataDao{
     /**
      * 存储得分榜中的数据
      */
-    private File file = new File("src/Datas.txt");
+    private final File file = new File("src/Datas.txt");
 
     private Integer rank;
 
@@ -209,5 +209,30 @@ public class DataDaoimpi implements DataDao{
     @Override
     public Integer getRank(){
         return rank;
+    }
+
+    @Override
+    public void setUserName(String userName) {
+        for(int i=0; i<dataTable.size(); i++){
+            if(dataTable.get(i).getDataId().equals(rank)){
+                dataTable.get(i).setUserName(userName);
+                this.fileWriter();
+            }
+        }
+    }
+
+    @Override
+    public void removeByRank(int rank) {
+        for(int i=0; i<dataTable.size(); i++){
+            if(dataTable.get(i).getDataId().equals(rank)){
+                dataTable.remove(i);
+                for(int j=i+1; j<dataTable.size(); j++){
+                    dataTable.get(j).setDataId(j+2);
+                }
+                break;
+            }
+
+        }
+        this.fileWriter();
     }
 }

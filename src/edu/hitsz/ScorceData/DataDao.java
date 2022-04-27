@@ -14,4 +14,6 @@ public interface DataDao {
     int getMinute();
     LinkedList<Data> getDataTable();
     Integer getRank();
+    void setUserName(String userName);
+    void removeByRank(int rank);
 }

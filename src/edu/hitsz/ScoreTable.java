@@ -5,30 +5,29 @@ import edu.hitsz.application.Game;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
 public class ScoreTable {
-    private JPanel ScoreTablePanel;
-    private JPanel HeaderPanel;
-    private JTable ConctrectScoreTable;
-    private JScrollPane SocreTable;
+    private JPanel scoreTablePanel;
+    private JPanel headerPanel;
+    private JTable conctrectScoreTable;
+    private JScrollPane socreTable;
+    private JPanel bottomPanel;
+    private JButton deletButoom;
+    private JLabel concrectHeaderPanel;
 
     public ScoreTable(){
         //获取用户名字
         String userName = JOptionPane.showInputDialog("你当前的得分为:"+Game.dataPatternDemo.getScore()+"请输入你的名字:");
+        //设置当前进行游戏的用户的名称
+        Game.dataPatternDemo.setUserName(userName);
         LinkedList<Data> dataTable = Game.dataPatternDemo.getDataTable();
         String[] columnName = {"排名","玩家名称","得分","时间"};
         String[][] tableData = new String[dataTable.size()][4];
 
         for(int i=0; i<dataTable.size(); i++){
-            if(dataTable.get(i).getDataId().equals(Game.dataPatternDemo.getRank())){
-                //设置当前进行游戏的用户的名称
-                dataTable.get(i).setUserName(userName);
-            }
             for(int j=0; j<dataTable.size(); j++){
                 if(i+1 == dataTable.get(j).getDataId()){
                     tableData[i][0] = dataTable.get(j).getDataId().toString();
@@ -46,11 +45,22 @@ public class ScoreTable {
             }
         };
         //从表格模型那里获取数据
-        ConctrectScoreTable.setModel(model);
-        SocreTable.setViewportView(ConctrectScoreTable);
+        conctrectScoreTable.setModel(model);
+        socreTable.setViewportView(conctrectScoreTable);
+        deletButoom.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = conctrectScoreTable.getSelectedRow();
+                if(row != -1 && JOptionPane.showConfirmDialog(scoreTablePanel,"是否要删除当前选中的玩家的得分记录？","删除记录",0) == 0){
+                    //删除一行数据
+                    model.removeRow(row);
+                    Game.dataPatternDemo.removeByRank(row+1);
+                }
+            }
+        });
     }
 
     public JPanel getScoreTablePanel(){
-        return ScoreTablePanel;
+        return scoreTablePanel;
     }
 }

@@ -5,11 +5,11 @@ import java.io.Serializable;
 public class Data implements Serializable {
     private Integer dataId;
     private String userName;
-    private Integer score;
-    private Integer month;
-    private Integer day;
-    private Integer hour;
-    private Integer minute;
+    private final Integer score;
+    private final Integer month;
+    private final Integer day;
+    private final Integer hour;
+    private final Integer minute;
 
     public Data(int score,int month,int day,int hour,int minute){
         this.score = score;
