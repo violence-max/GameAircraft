@@ -17,7 +17,7 @@ public class DataDaoimpi implements DataDao{
     /**
      * 存储得分榜中的数据
      */
-    private File file = new File("./Datas.txt");
+    private File file = new File("src/Datas.txt");
 
     public DataDaoimpi(){
         dataTable = new LinkedList<>();
@@ -115,8 +115,6 @@ public class DataDaoimpi implements DataDao{
     @Override
     public void creatFile() {
         if(!file.exists()) {
-            //在AircraftWar-base目录下创建文件
-            file.getParentFile().mkdir();
             try {
                 file.createNewFile();
             } catch (IOException e) {
