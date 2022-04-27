@@ -111,8 +111,10 @@ public class Game extends JPanel {
      * 游戏启动入口，执行游戏逻辑
      */
     public void action() {
-        musicAction.setGameBgmFlag(true);
-        musicAction.gameBgm();
+        if (Main.IS_MUSIC){
+            musicAction.setGameBgmFlag(true);
+            musicAction.gameBgm();
+        }
         // 定时任务：绘制、对象产生、碰撞判定、击毁及结束判定
         Runnable task = () -> {
 
@@ -149,12 +151,14 @@ public class Game extends JPanel {
                         BossEnemy falseBossEnemy = creatEnemyAircrafts.creatbossenemy();
                         enemyAircrafts.add(falseBossEnemy);
                         bossisexitflag = false;
-                        //停止播放游戏背景音乐
-                        musicAction.setGameBgmFlag(false);
-                        musicAction.gameBgm();
-                        //开始播放boss敌机背景音乐
-                        musicAction.setBossBgmFlag(true);
-                        musicAction.bossBgm();
+                        if (Main.IS_MUSIC){
+                            //停止播放游戏背景音乐
+                            musicAction.setGameBgmFlag(false);
+                            musicAction.gameBgm();
+                            //开始播放boss敌机背景音乐
+                            musicAction.setBossBgmFlag(true);
+                            musicAction.bossBgm();
+                        }
                     }
                 }
                 // 飞机射出子弹
@@ -180,14 +184,16 @@ public class Game extends JPanel {
 
             // 游戏结束检查
             if (heroAircraft.getHp() <= 0) {
-                musicAction.gameOverBgm();
+                if (Main.IS_MUSIC){
+                    musicAction.gameOverBgm();
 
-                //关闭游戏背景音乐
-                musicAction.setGameBgmFlag(false);
-                musicAction.gameBgm();
-                ///关闭boss敌机背景音乐
-                musicAction.setBossBgmFlag(false);
-                musicAction.bossBgm();
+                    //关闭游戏背景音乐
+                    musicAction.setGameBgmFlag(false);
+                    musicAction.gameBgm();
+                    ///关闭boss敌机背景音乐
+                    musicAction.setBossBgmFlag(false);
+                    musicAction.bossBgm();
+                }
 
                 //如果文件不存在则创建文件
                 dataPatternDemo.fileCreat();
@@ -266,7 +272,9 @@ public class Game extends JPanel {
         }
         // 英雄射击
         heroBullets.addAll(heroAircraft.shoot());
-        musicAction.shootBgm();
+        if (Main.IS_MUSIC){
+            musicAction.shootBgm();
+        }
     }
 
     private void bulletsMoveAction() {
@@ -324,7 +332,12 @@ public class Game extends JPanel {
                 if (enemyAircraft.crash(bullet)) {
                     // 敌机撞击到英雄机子弹
                     // 敌机损失一定生命值
-                    musicAction.shootHitBgm();
+
+                    if (Main.IS_MUSIC){
+                        //播放英雄击中敌机的bgm
+                        musicAction.shootHitBgm();
+                    }
+
                     enemyAircraft.decreaseHp(bullet.getPower());
                     bullet.vanish();
                     if (enemyAircraft.notValid()) {
@@ -361,12 +374,14 @@ public class Game extends JPanel {
                             score += 20;
                         }
                         else{
-                            //开始播放游戏背景音乐
-                            musicAction.setGameBgmFlag(true);
-                            musicAction.gameBgm();
-                            //停止播放boss敌机背景音乐
-                            musicAction.setBossBgmFlag(false);
-                            musicAction.bossBgm();
+                            if (Main.IS_MUSIC){
+                                //开始播放游戏背景音乐
+                                musicAction.setGameBgmFlag(true);
+                                musicAction.gameBgm();
+                                //停止播放boss敌机背景音乐
+                                musicAction.setBossBgmFlag(false);
+                                musicAction.bossBgm();
+                            }
                             score += 200;
                         }
                     }
@@ -386,10 +401,16 @@ public class Game extends JPanel {
                 if(prop instanceof HpProp){
                     heroAircraft.decreaseHp(((HpProp) prop).increasehp());
                 }else if(prop instanceof BoomProp){
-                    musicAction.bombExplosion();
+                    if (Main.IS_MUSIC){
+                        //播放获取炸弹道具的背景音乐
+                        musicAction.bombExplosion();
+                    }
                     ((BoomProp) prop).boom();
                 }else if(prop instanceof FireProp){
-                    musicAction.getSupply();
+                    if (Main.IS_MUSIC){
+                        //播放获取火力道具的背景音乐
+                        musicAction.getSupply();
+                    }
                     ((FireProp) prop).fire(heroAircraft);
                 }
                 prop.vanish();
