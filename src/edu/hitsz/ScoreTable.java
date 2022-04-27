@@ -18,10 +18,17 @@ public class ScoreTable {
     private JScrollPane SocreTable;
 
     public ScoreTable(){
+        //获取用户名字
+        String userName = JOptionPane.showInputDialog("你当前的得分为:"+Game.dataPatternDemo.getScore()+"请输入你的名字:");
         LinkedList<Data> dataTable = Game.dataPatternDemo.getDataTable();
         String[] columnName = {"排名","玩家名称","得分","时间"};
         String[][] tableData = new String[dataTable.size()][4];
+
         for(int i=0; i<dataTable.size(); i++){
+            if(dataTable.get(i).getDataId().equals(Game.dataPatternDemo.getRank())){
+                //设置当前进行游戏的用户的名称
+                dataTable.get(i).setUserName(userName);
+            }
             for(int j=0; j<dataTable.size(); j++){
                 if(i+1 == dataTable.get(j).getDataId()){
                     tableData[i][0] = dataTable.get(j).getDataId().toString();

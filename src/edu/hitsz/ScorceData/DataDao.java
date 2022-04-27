@@ -13,4 +13,5 @@ public interface DataDao {
     int getHour();
     int getMinute();
     LinkedList<Data> getDataTable();
+    Integer getRank();
 }

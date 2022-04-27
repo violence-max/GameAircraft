@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Data implements Serializable {
     private Integer dataId;
-    private String userName = "violence";
+    private String userName;
     private Integer score;
     private Integer month;
     private Integer day;
@@ -49,6 +49,10 @@ public class Data implements Serializable {
 
     public String getUserName() {
         return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     @Override

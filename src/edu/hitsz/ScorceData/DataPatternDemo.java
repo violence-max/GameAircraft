@@ -32,6 +32,14 @@ public class DataPatternDemo {
         minute = dateDao.getMinute();
     }
 
+    public int getScore(){
+        return score;
+    }
+
+    public Integer getRank() {
+        return dateDao.getRank();
+    }
+
     public void addData(){
         dateDao.doAdd(score,month,day,hour,minute);
     }
