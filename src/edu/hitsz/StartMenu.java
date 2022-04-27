@@ -21,6 +21,7 @@ public class StartMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 StartMenu.setVisible(false);
+                Main.IS_EASY_GAME = true;
                 synchronized (Main.MAIN_LOCK){
                     //选定难度，通知主线程等待结束
                     Main.MAIN_LOCK.notify();
@@ -31,6 +32,7 @@ public class StartMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 StartMenu.setVisible(false);
+                Main.IS_NORMAL_GAME = true;
                 synchronized (Main.MAIN_LOCK){
                     //选定难度，通知主线程等待结束
                     Main.MAIN_LOCK.notify();
@@ -41,6 +43,7 @@ public class StartMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 StartMenu.setVisible(false);
+                Main.IS_HARD_GAME = true;
                 synchronized (Main.MAIN_LOCK){
                     //选定难度，通知主线程等待结束
                     Main.MAIN_LOCK.notify();

@@ -45,8 +45,13 @@ public class ImageManager {
 
     static {
         try {
-
-            BACKGROUND_IMAGE = ImageIO.read(new FileInputStream("src/images/bg.jpg"));
+            if (Main.IS_EASY_GAME){
+                BACKGROUND_IMAGE = ImageIO.read(new FileInputStream("src/images/bg.jpg"));
+            }else if (Main.IS_NORMAL_GAME){
+                BACKGROUND_IMAGE = ImageIO.read(new FileInputStream("src/images/bg2.jpg"));
+            }else {
+                BACKGROUND_IMAGE = ImageIO.read(new FileInputStream("src/images/bg3.jpg"));
+            }
 
             HERO_IMAGE = ImageIO.read(new FileInputStream("src/images/hero.png"));
             MOB_ENEMY_IMAGE = ImageIO.read(new FileInputStream("src/images/mob.png"));

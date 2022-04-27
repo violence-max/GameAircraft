@@ -15,6 +15,10 @@ public class Main {
     public static final int WINDOW_HEIGHT = 768;
     public static final Object MAIN_LOCK = new Object();
     public static boolean IS_MUSIC = false;
+    public static boolean IS_EASY_GAME = false;
+    public static boolean IS_NORMAL_GAME = false;
+    public static boolean IS_HARD_GAME = false;
+
 
     public static void main(String[] args) {
 
@@ -53,7 +57,7 @@ public class Main {
         }else{
             IS_MUSIC = false;
         }
-        
+
         //移除第一个页面
         frame.remove(startMenuPanel);
 
