@@ -3,13 +3,13 @@ package edu.hitsz.ScorceData;
 import java.io.Serializable;
 
 public class Data implements Serializable {
-    private int dataId;
+    private Integer dataId;
     private String userName = "violence";
-    private int score;
-    private int month;
-    private int day;
-    private int hour;
-    private int minute;
+    private Integer score;
+    private Integer month;
+    private Integer day;
+    private Integer hour;
+    private Integer minute;
 
     public Data(int score,int month,int day,int hour,int minute){
         this.score = score;
@@ -23,27 +23,27 @@ public class Data implements Serializable {
         this.dataId = dataId;
     }
 
-    public int getDataId() {
+    public Integer getDataId() {
         return dataId;
     }
 
-    public int getScore() {
+    public Integer getScore() {
         return score;
     }
 
-    public int getMonth() {
+    public Integer getMonth() {
         return month;
     }
 
-    public int getDay() {
+    public Integer getDay() {
         return day;
     }
 
-    public int getHour() {
+    public Integer getHour() {
         return hour;
     }
 
-    public int getMinute() {
+    public Integer getMinute() {
         return minute;
     }
 

@@ -1,5 +1,7 @@
 package edu.hitsz.ScorceData;
 
+import java.util.LinkedList;
+
 public class DataPatternDemo {
 
     private int score;
@@ -48,7 +50,9 @@ public class DataPatternDemo {
         dateDao.fileReader();
     }
 
-    public void filePrint(){dateDao.filePrint();}
+    public LinkedList<Data> getDataTable(){
+        return dateDao.getDataTable();
+    }
 
     public void fileAction(int score){
         //若文件不存在则创建文件
@@ -71,8 +75,6 @@ public class DataPatternDemo {
         this.sort();
         //将数据写入文件
         this.fileWrite();
-        //打印得分排行榜
-        this.filePrint();
     }
 
 }

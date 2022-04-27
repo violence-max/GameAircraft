@@ -152,23 +152,6 @@ public class DataDaoimpi implements DataDao{
         }
     }
 
-    /**
-     * 读取文件
-     */
-    @Override
-    public void filePrint() {
-        System.out.println("**************************************************"+"\n"+
-                "                   得分排行榜                 "+"\n"+
-                "**************************************************");
-        for(int i=0; i<dataTable.size(); i++){
-            for(int j=0; j<dataTable.size(); j++){
-                if(i+1 == dataTable.get(j).getDataId()){
-                    System.out.println(dataTable.get(j));
-                }
-            }
-        }
-
-    }
 
     @Override
     public void fileReader() {
@@ -209,4 +192,8 @@ public class DataDaoimpi implements DataDao{
         return calendar.get(Calendar.MINUTE);
     }
 
+    @Override
+    public LinkedList<Data> getDataTable() {
+        return dataTable;
+    }
 }

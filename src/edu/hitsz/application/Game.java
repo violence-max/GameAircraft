@@ -43,7 +43,7 @@ public class Game extends JPanel {
 
     private int enemyMaxNumber = 6;
 
-    private boolean gameOverFlag = false;
+    public static boolean gameOverFlag = false;
     private int score = 0;
     private int time = 0;
     /**
@@ -80,7 +80,7 @@ public class Game extends JPanel {
     /**
      * 构建一个访问数据对象
      */
-    private DataPatternDemo dataPatternDemo = new DataPatternDemo();
+    public static DataPatternDemo dataPatternDemo = new DataPatternDemo();
 
     /**
      * 创建敌机的对象
@@ -202,6 +202,9 @@ public class Game extends JPanel {
                 executorService.shutdown();
                 gameOverFlag = true;
                 System.out.println("Game Over!");
+                synchronized (Main.class){
+                    Main.class.notify();
+                }
 
 
             }

@@ -13,7 +13,6 @@ public class Main {
 
     public static final int WINDOW_WIDTH = 512;
     public static final int WINDOW_HEIGHT = 768;
-    public static final Object MAIN_LOCK = new Object();
     public static boolean IS_MUSIC = false;
     public static boolean IS_EASY_GAME = false;
     public static boolean IS_NORMAL_GAME = false;
@@ -40,14 +39,11 @@ public class Main {
         frame.setContentPane(startMenuPanel);
         frame.setVisible(true);
 
-        synchronized (MAIN_LOCK){
-            while(startMenuPanel.isVisible()){
-                //选择页面，线程等待
-                try {
-                    MAIN_LOCK.wait();
-                }catch (InterruptedException e){
-                    e.printStackTrace();
-                }
+        synchronized (Main.class){
+            try {
+                Main.class.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
 
@@ -61,10 +57,28 @@ public class Main {
         //移除第一个页面
         frame.remove(startMenuPanel);
 
-        //游戏界面
+        //第二个界面，游戏界面
         Game game = new Game();
         frame.setContentPane(game);
         frame.setVisible(true);
         game.action();
+
+        synchronized (Main.class){
+            try {
+                Main.class.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //移除游戏界面
+        frame.remove(game);
+
+        //第三个界面，得分排行榜界面
+        ScoreTable scoreTable = new ScoreTable();
+        JPanel panel = scoreTable.getScoreTablePanel();
+        panel.setVisible(true);
+        frame.setContentPane(panel);
+        frame.setVisible(true);
     }
 }
