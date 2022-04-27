@@ -1,6 +1,8 @@
 package edu.hitsz.ScorceData;
 
-public class Data {
+import java.io.Serializable;
+
+public class Data implements Serializable {
     private int dataId;
     private String userName = "violence";
     private int score;
@@ -47,5 +49,10 @@ public class Data {
 
     public String getUserName() {
         return userName;
+    }
+
+    @Override
+    public String toString(){
+        return "第"+dataId+"名,"+userName+","+score+","+month+"月"+day+"日"+","+hour+"时"+minute+"分";
     }
 }

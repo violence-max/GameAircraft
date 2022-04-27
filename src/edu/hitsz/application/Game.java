@@ -124,7 +124,7 @@ public class Game extends JPanel {
             // 周期性执行（控制频率）
             if (timeCountAndNewCycleJudge()) {
                 temp1 = r.nextInt(2);
-                System.out.println(time);
+//                System.out.println(time);
                 // 普通敌机，精英敌机和boss敌机产生
                 if (enemyAircrafts.size() < enemyMaxNumber) {
                     //普通敌机
@@ -195,28 +195,8 @@ public class Game extends JPanel {
                     musicAction.bossBgm();
                 }
 
-                //如果文件不存在则创建文件
-                dataPatternDemo.fileCreat();
-                //将文件中的数据拷贝出来
-                dataPatternDemo.fileCopy();
-                //获取游戏分数
-                dataPatternDemo.setScore(score);
-                //获取当前月份
-                dataPatternDemo.setMonth();
-                //获取当前日
-                dataPatternDemo.setDay();
-                //获取当前小时
-                dataPatternDemo.setHour();
-                //获取当前分钟
-                dataPatternDemo.setMinute();
-                //添加数据
-                dataPatternDemo.addData();
-                //对数据进行排序
-                dataPatternDemo.sort();
-                //向数据写入文件
-                dataPatternDemo.fileWrite();
-                //输出文件内容
-                dataPatternDemo.fileRead();
+                //打印得分排行榜
+                dataPatternDemo.fileAction(score);
 
                 // 游戏结束
                 executorService.shutdown();

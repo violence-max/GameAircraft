@@ -8,17 +8,16 @@ import java.util.Scanner;
 import static java.util.Collections.reverseOrder;
 import static java.util.Collections.sort;
 
+/**
+ * @author 谢岸峰
+ */
 public class DataDaoimpi implements DataDao{
 
-    private LinkedList<Data> dataTable;
+    private final LinkedList<Data> dataTable;
     /**
      * 存储得分榜中的数据
      */
     private File file = new File("./Datas.txt");
-    /**
-     * 只存储数据表中的名次、分数和日期与时间的文件
-     */
-    private File readOnlyFile = new File("./ReadOnly.txt");
 
     public DataDaoimpi(){
         dataTable = new LinkedList<>();
@@ -124,14 +123,6 @@ public class DataDaoimpi implements DataDao{
                 e.printStackTrace();
             }
         }
-        if(!readOnlyFile.exists()){
-            readOnlyFile.getParentFile().mkdir();
-            try {
-                readOnlyFile.createNewFile();
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-        }
     }
 
     /**
@@ -143,45 +134,20 @@ public class DataDaoimpi implements DataDao{
             if(file.exists()) {
                 //先删除，后重写文件
                 file.delete();
-                readOnlyFile.delete();
                 this.creatFile();
 
                 //输出流和写入流
                 FileOutputStream fop = new FileOutputStream(file);
-                OutputStreamWriter writer = new OutputStreamWriter(fop);
-                writer.append("******************************************" + "\n");
-                writer.append("                  得分排行榜                " + "\n");
-                writer.append("******************************************" + "\n");
+                ObjectOutputStream writer = new ObjectOutputStream(fop);
                 for (int i = 0; i < dataTable.size(); i++) {
-                    for (int j = 0; j < dataTable.size(); j++) {
-                        if (i + 1 == dataTable.get(j).getDataId()) {
-                            writer.append("第" + dataTable.get(j).getDataId() + "名" + ":" + dataTable.get(j).getUserName() + "," + dataTable.get(j).getScore() + "," + dataTable.get(j).getMonth() + "月" + dataTable.get(j).getDay() + "日" + "," + dataTable.get(j).getHour() + "点" + dataTable.get(j).getMinute() + "分" + "\n");
+                    for (Data data : dataTable) {
+                        if (i + 1 == data.getDataId()) {
+                            writer.writeObject(data);
                         }
                     }
                 }
                 writer.close();
                 fop.close();
-            }
-            if(readOnlyFile.exists()){
-                FileOutputStream ffop =new FileOutputStream(readOnlyFile);
-                OutputStreamWriter fwriter = new OutputStreamWriter(ffop);
-                for(int k=0; k<dataTable.size(); k++){
-                    for(int l=0; l<dataTable.size(); l++){
-                        if(k+1 == dataTable.get(l).getDataId()){
-                            //以"|"为分隔符
-                            if(k < dataTable.size()-1){
-                                fwriter.append(dataTable.get(l).getDataId()+"|"+dataTable.get(l).getScore()+"|"+dataTable.get(l).getMonth()+"|"+dataTable.get(l).getDay()+"|"+dataTable.get(l).getHour()+"|"+dataTable.get(l).getMinute()+"|");
-                            }
-                            else{
-                                fwriter.append(dataTable.get(l).getDataId()+"|"+dataTable.get(l).getScore()+"|"+dataTable.get(l).getMonth()+"|"+dataTable.get(l).getDay()+"|"+dataTable.get(l).getHour()+"|"+dataTable.get(l).getMinute());
-                            }
-                            break;
-                        }
-                    }
-                }
-                //关闭写入流和输出流
-                fwriter.close();
-                ffop.close();
             }
         }catch (IOException e){
             e.printStackTrace();
@@ -192,47 +158,32 @@ public class DataDaoimpi implements DataDao{
      * 读取文件
      */
     @Override
-    public void fileReader() {
-        if(file.exists()){
-            try {
-                //输入流和读取流
-                FileInputStream fip = new FileInputStream(file);
-                InputStreamReader reader = new InputStreamReader(fip);
-                StringBuffer stringBuffer = new StringBuffer();
-                while(reader.ready()){
-                    stringBuffer.append((char)reader.read());
+    public void filePrint() {
+        System.out.println("**************************************************"+"\n"+
+                "                   得分排行榜                 "+"\n"+
+                "**************************************************");
+        for(int i=0; i<dataTable.size(); i++){
+            for(int j=0; j<dataTable.size(); j++){
+                if(i+1 == dataTable.get(j).getDataId()){
+                    System.out.println(dataTable.get(j));
                 }
-                System.out.println(stringBuffer.toString());
-                //关闭读取流和输入流
-                reader.close();
-                fip.close();
-            }catch (IOException e){
-                e.printStackTrace();
             }
         }
-        else{
-            System.out.println("文件不存在");
-        }
+
     }
 
     @Override
-    public void fileCopy() {
+    public void fileReader() {
         try{
-            Scanner scanner = new Scanner(new FileReader(readOnlyFile));
-            scanner.useDelimiter("\\|");
-            while(scanner.hasNextInt()){
-                //循环读取文件中的数据，在dataTable中创建并添加对应的Data
-                int rank = scanner.nextInt();
-                int score = scanner.nextInt();
-                int month = scanner.nextInt();
-                int day = scanner.nextInt();
-                int hour = scanner.nextInt();
-                int minute = scanner.nextInt();
-                this.doAdd(score,month,day,hour,minute);
-                dataTable.getLast().setDataId(rank);
+            FileInputStream fip = new FileInputStream(file);
+            ObjectInputStream reader  = new ObjectInputStream(fip);
+            Data data = (Data) reader.readObject();
+            while (data != null){
+                dataTable.addLast(data);
+                data = (Data) reader.readObject();
             }
-        }catch (IOException e){
-            e.printStackTrace();
+            } catch (IOException | ClassNotFoundException e){
+
         }
     }
 

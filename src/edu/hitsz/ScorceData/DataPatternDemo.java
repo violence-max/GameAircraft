@@ -42,16 +42,37 @@ public class DataPatternDemo {
         dateDao.creatFile();
     }
 
-    public void fileWrite(){
-        dateDao.fileWriter();
-    }
+    public void fileWrite(){dateDao.fileWriter();}
 
-    public void fileRead(){
+    public void fileReader(){
         dateDao.fileReader();
     }
 
-    public void fileCopy(){
-        dateDao.fileCopy();
+    public void filePrint(){dateDao.filePrint();}
+
+    public void fileAction(int score){
+        //若文件不存在则创建文件
+        this.fileCreat();
+        //若文件存在则读取文件
+        this.fileReader();
+        //获取游戏结束时的分数
+        this.setScore(score);
+        //获取当前月份
+        this.setMonth();
+        //获取当前日
+        this.setDay();
+        //获取当前小时
+        this.setHour();
+        //获取当前分钟
+        this.setMinute();
+        //添加一条数据
+        this.addData();
+        //对得分进行排名
+        this.sort();
+        //将数据写入文件
+        this.fileWrite();
+        //打印得分排行榜
+        this.filePrint();
     }
 
 }
