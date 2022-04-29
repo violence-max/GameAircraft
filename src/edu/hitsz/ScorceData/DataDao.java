@@ -16,4 +16,5 @@ public interface DataDao {
     Integer getRank();
     void setUserName(String userName);
     void removeByRank(int rank);
+    void fileSelect();
 }

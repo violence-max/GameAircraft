@@ -1,12 +1,11 @@
 package edu.hitsz.ScorceData;
 
+import edu.hitsz.StartMenu;
+
 import java.io.*;
 import java.util.Calendar;
 import java.util.LinkedList;
-import java.util.Scanner;
 
-import static java.util.Collections.reverseOrder;
-import static java.util.Collections.sort;
 
 /**
  * @author 谢岸峰
@@ -17,7 +16,12 @@ public class DataDaoimpi implements DataDao{
     /**
      * 存储得分榜中的数据
      */
-    private final File file = new File("src/Datas.txt");
+    private final File easyModeFile = new File("src/easyModeData.txt");
+    private final File commonModeFile = new File("src/commonModeData.txt");
+    private final File hardModeFile = new File("src/hardModeData.txt");
+
+    File file = null;
+
 
     private Integer rank;
 
@@ -123,11 +127,32 @@ public class DataDaoimpi implements DataDao{
 
     @Override
     public void creatFile() {
-        if(!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
+        if(StartMenu.difficultyMode == 0){
+            //简单模式创建对应存数据的文件
+            if(!easyModeFile.exists()) {
+                try {
+                    easyModeFile.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }else if(StartMenu.difficultyMode == 1){
+            //普通模式创建对应的文件
+            if(!commonModeFile.exists()) {
+                try {
+                    commonModeFile.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }else{
+            //困难模式创建对应的文件夹
+            if(!hardModeFile.exists()) {
+                try {
+                    hardModeFile.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -138,24 +163,24 @@ public class DataDaoimpi implements DataDao{
     @Override
     public void fileWriter() {
         try {
-            if(file.exists()) {
-                //先删除，后重写文件
+            if (file.exists()){
+                //若文件存在则先删除再重建
                 file.delete();
                 this.creatFile();
-
-                //输出流和写入流
-                FileOutputStream fop = new FileOutputStream(file);
-                ObjectOutputStream writer = new ObjectOutputStream(fop);
-                for (int i = 0; i < dataTable.size(); i++) {
-                    for (Data data : dataTable) {
-                        if (i + 1 == data.getDataId()) {
-                            writer.writeObject(data);
-                        }
+                this.fileSelect();
+            }
+            //输出流和写入流
+            FileOutputStream fop = new FileOutputStream(file);
+            ObjectOutputStream writer = new ObjectOutputStream(fop);
+            for (int i = 0; i < dataTable.size(); i++) {
+                for (Data data : dataTable) {
+                    if (i + 1 == data.getDataId()) {
+                        writer.writeObject(data);
                     }
                 }
-                writer.close();
-                fop.close();
             }
+            writer.close();
+            fop.close();
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -213,9 +238,9 @@ public class DataDaoimpi implements DataDao{
 
     @Override
     public void setUserName(String userName) {
-        for(int i=0; i<dataTable.size(); i++){
-            if(dataTable.get(i).getDataId().equals(rank)){
-                dataTable.get(i).setUserName(userName);
+        for (Data data : dataTable) {
+            if (data.getDataId().equals(rank)) {
+                data.setUserName(userName);
                 this.fileWriter();
             }
         }
@@ -234,5 +259,16 @@ public class DataDaoimpi implements DataDao{
 
         }
         this.fileWriter();
+    }
+
+    @Override
+    public void fileSelect() {
+        if (StartMenu.difficultyMode == 0){
+            file = easyModeFile;
+        }else if (StartMenu.difficultyMode == 1){
+            file = commonModeFile;
+        }else{
+            file = hardModeFile;
+        }
     }
 }

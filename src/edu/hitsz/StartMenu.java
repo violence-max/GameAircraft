@@ -16,10 +16,16 @@ public class StartMenu {
     private JComboBox musicSelet;
     private JPanel startMenu;
 
+    /**
+     * 难度模式，简单模式其值为0，普通模式其值为1，困难模式其值为2
+     */
+    public static int difficultyMode;
+
     public StartMenu() {
         easyGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                difficultyMode = 0;
                 startMenu.setVisible(false);
                 Main.IS_EASY_GAME = true;
                 synchronized (Main.class){
@@ -31,6 +37,7 @@ public class StartMenu {
         normalGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                difficultyMode = 1;
                 startMenu.setVisible(false);
                 Main.IS_NORMAL_GAME = true;
                 synchronized (Main.class){
@@ -42,6 +49,7 @@ public class StartMenu {
         hardGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                difficultyMode = 2;
                 startMenu.setVisible(false);
                 Main.IS_HARD_GAME = true;
                 synchronized (Main.class){

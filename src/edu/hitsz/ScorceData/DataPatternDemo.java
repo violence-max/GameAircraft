@@ -70,9 +70,15 @@ public class DataPatternDemo {
         dateDao.removeByRank(rank);
     }
 
+    public void fileSelect(){
+        dateDao.fileSelect();
+    }
+
     public void fileAction(int score){
         //若文件不存在则创建文件
         this.fileCreat();
+        //选定是哪种模式的文件
+        this.fileSelect();
         //若文件存在则读取文件
         this.fileReader();
         //获取游戏结束时的分数

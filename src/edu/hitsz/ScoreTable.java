@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
+/**
+ * @author 谢岸峰
+ */
 public class ScoreTable {
     private JPanel scoreTablePanel;
     private JPanel headerPanel;
@@ -17,8 +20,20 @@ public class ScoreTable {
     private JPanel bottomPanel;
     private JButton deletButoom;
     private JLabel concrectHeaderPanel;
+    private JLabel modeLabel;
+
+    private String easyLabelText = "难度：简单";
+    private String commonLabelText = "难度：普通";
+    private String hardLabelText = "难度：困难";
 
     public ScoreTable(){
+        if(StartMenu.difficultyMode == 0){
+            this.setLabelText(easyLabelText);
+        }else if (StartMenu.difficultyMode == 1){
+            this.setLabelText(commonLabelText);
+        }else{
+            this.setLabelText(hardLabelText);
+        }
         //获取用户名字
         String userName = JOptionPane.showInputDialog("你当前的得分为:"+Game.dataPatternDemo.getScore()+"请输入你的名字:");
         //设置当前进行游戏的用户的名称
@@ -62,5 +77,9 @@ public class ScoreTable {
 
     public JPanel getScoreTablePanel(){
         return scoreTablePanel;
+    }
+
+    public void setLabelText(String labelText){
+        modeLabel.setText(labelText);
     }
 }
