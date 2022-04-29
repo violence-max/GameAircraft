@@ -313,14 +313,14 @@ public class Game extends JPanel {
                     continue;
                 }
                 if (enemyAircraft.crash(bullet)) {
-                    // 敌机撞击到英雄机子弹
-                    // 敌机损失一定生命值
+
 
                     if (Main.IS_MUSIC){
                         //播放英雄击中敌机的bgm
                         musicAction.shootHitBgm();
                     }
-
+                    // 敌机撞击到英雄机子弹
+                    // 敌机损失一定生命值
                     enemyAircraft.decreaseHp(bullet.getPower());
                     bullet.vanish();
                     if (enemyAircraft.notValid()) {
@@ -388,12 +388,14 @@ public class Game extends JPanel {
                         //播放获取炸弹道具的背景音乐
                         musicAction.bombExplosion();
                     }
-                    ((BoomProp) prop).boom();
+                    //炸弹道具生效
+                    ((BoomProp) prop).boom(enemyAircrafts,enemyBullets);
                 }else if(prop instanceof FireProp){
                     if (Main.IS_MUSIC){
                         //播放获取火力道具的背景音乐
                         musicAction.getSupply();
                     }
+                    //火力道具生效
                     ((FireProp) prop).fire(heroAircraft);
                 }
                 prop.vanish();
