@@ -2,8 +2,8 @@ package edu.hitsz.Prop;
 
 import edu.hitsz.aircraft.AbstractAircraft;
 import edu.hitsz.bullet.BaseBullet;
-import watcher.EnemysAndTheirBullets;
-import watcher.TobeDelete;
+import edu.hitsz.watcher.EnemysAndTheirBullets;
+import edu.hitsz.watcher.TobeDelete;
 
 import java.util.List;
 
@@ -17,6 +17,4 @@ public class BoomProp extends AbstractProp  {
         TobeDelete delete = new EnemysAndTheirBullets();
         delete.update(enemyAircrafts,enemyBullets);
     }
-
-
 }

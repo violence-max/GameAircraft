@@ -44,7 +44,7 @@ public class Game extends JPanel {
     private int enemyMaxNumber = 6;
 
     public static boolean gameOverFlag = false;
-    private int score = 0;
+    public static int score = 0;
     private int time = 0;
     /**
      * 周期（ms)
@@ -60,8 +60,6 @@ public class Game extends JPanel {
      */
     Random r = new Random();
     private int temp1;
-    private int temp2;
-
 
 
     /**
@@ -327,7 +325,7 @@ public class Game extends JPanel {
                         // TODO 获得分数，产生道具补给
                         CreatProps creatProps = new CreatProps();
                         if(enemyAircraft instanceof EliteEnemy || enemyAircraft instanceof BossEnemy){
-                            temp2 = r.nextInt(4);
+                            int temp2 = r.nextInt(4);
                             if (temp2 == 0){
                                 //产生恢复hp道具
                                 HpProp hp = creatProps.creathpprop(enemyAircraft);

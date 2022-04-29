@@ -1,4 +1,4 @@
-package watcher;
+package edu.hitsz.watcher;
 
 import edu.hitsz.aircraft.AbstractAircraft;
 import edu.hitsz.bullet.BaseBullet;
