@@ -5,7 +5,7 @@ import edu.hitsz.aircraft.EliteEnemy;
 import edu.hitsz.aircraft.MobEnemy;
 
 public interface EnemyAircraftProduct {
-    EliteEnemy createliteenemy();
-    MobEnemy creatmobenemy();
-    BossEnemy creatbossenemy();
+    EliteEnemy createEliteEnemy();
+    MobEnemy creatMobEnemy();
+    BossEnemy creatBossEnemy();
 }

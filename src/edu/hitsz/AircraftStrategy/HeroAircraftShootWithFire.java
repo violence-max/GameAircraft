@@ -15,11 +15,11 @@ public class HeroAircraftShootWithFire implements HeroAircraftShootStrategy{
 
     @Override
     public List<BaseBullet> shoot(AbstractAircraft heroAircraft) {
-        eliteShootNum = 4;
         //子弹数量增加
+        eliteShootNum = 4;
 
-        elitePower = 60;
         //子弹伤害翻倍
+        elitePower = 60;
 
         List<BaseBullet> res = new LinkedList<>();
         int x = heroAircraft.getLocationX();

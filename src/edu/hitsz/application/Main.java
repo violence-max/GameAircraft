@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 import edu.hitsz.*;
+import edu.hitsz.difficulty.mode.CommonGame;
+import edu.hitsz.difficulty.mode.EasyGame;
+import edu.hitsz.difficulty.mode.HardGame;
 
 /**
  * 程序入口
@@ -58,10 +61,29 @@ public class Main {
         frame.remove(startMenuPanel);
 
         //第二个界面，游戏界面
-        Game game = new Game();
-        frame.setContentPane(game);
-        frame.setVisible(true);
-        game.action();
+        JPanel gamePanel;
+        if (StartMenu.difficultyMode == 0){
+            //进入简单模式
+            EasyGame easyGame = new EasyGame();
+            gamePanel = easyGame;
+            frame.setContentPane(easyGame);
+            frame.setVisible(true);
+            easyGame.action();
+        }else if (StartMenu.difficultyMode == 1){
+            //进入普通模式
+            CommonGame commonGame = new CommonGame();
+            gamePanel = commonGame;
+            frame.setContentPane(commonGame);
+            frame.setVisible(true);
+            commonGame.action();
+        }else{
+            //进入困难模式
+            HardGame hardGame = new HardGame();
+            gamePanel = hardGame;
+            frame.setContentPane(hardGame);
+            frame.setVisible(true);
+            hardGame.action();
+        }
 
         synchronized (Main.class){
             try {
@@ -72,7 +94,7 @@ public class Main {
         }
 
         //移除游戏界面
-        frame.remove(game);
+        frame.remove(gamePanel);
 
         //第三个界面，得分排行榜界面
         ScoreTable scoreTable = new ScoreTable();

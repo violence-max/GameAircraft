@@ -6,31 +6,31 @@ import edu.hitsz.aircraft.MobEnemy;
 
 public class CreatEnemyAircrafts {
 
-        public EliteEnemy createliteenemy(){
-            EnemyAircraftFactory eliteenemyfactory;
-            EnemyAircraftProduct eliteenemyproduct;
+        public EliteEnemy createEliteEnemy(){
+            EnemyAircraftFactory eliteEnemyFactory;
+            EnemyAircraftProduct eliteEnemyProduct;
 
-            eliteenemyfactory = new CreatEliteEnemy();
-            eliteenemyproduct = eliteenemyfactory.creatEnemyProduct();
-            return eliteenemyproduct.createliteenemy();
+            eliteEnemyFactory = new CreatEliteEnemy();
+            eliteEnemyProduct = eliteEnemyFactory.creatEnemyProduct();
+            return eliteEnemyProduct.createEliteEnemy();
 
         }
 
-        public MobEnemy creatmobenemy(){
-            EnemyAircraftFactory mobenemyfactory;
+        public MobEnemy creatMobEnemy(){
+            EnemyAircraftFactory mobEnemyFactory;
             EnemyAircraftProduct mobenemyproduct;
 
-            mobenemyfactory = new CreatMobeEnemy();
-            mobenemyproduct = mobenemyfactory.creatEnemyProduct();
-            return mobenemyproduct.creatmobenemy();
+            mobEnemyFactory = new CreatMobeEnemy();
+            mobenemyproduct = mobEnemyFactory.creatEnemyProduct();
+            return mobenemyproduct.creatMobEnemy();
         }
 
-        public BossEnemy creatbossenemy(){
-            EnemyAircraftFactory bossenemyfactory;
-            EnemyAircraftProduct bossenemyproduct;
+        public BossEnemy creatBossEnemy(){
+            EnemyAircraftFactory bossEnemyFactory;
+            EnemyAircraftProduct bossEnemyProduct;
 
-            bossenemyfactory = new CreatBossEnemy();
-            bossenemyproduct = bossenemyfactory.creatEnemyProduct();
-            return bossenemyproduct.creatbossenemy();
+            bossEnemyFactory = new CreatBossEnemy();
+            bossEnemyProduct = bossEnemyFactory.creatEnemyProduct();
+            return bossEnemyProduct.creatBossEnemy();
         }
 }

@@ -4,18 +4,16 @@ import edu.hitsz.AircraftStrategy.BossEnemyShoot;
 import edu.hitsz.AircraftStrategy.EnemyAircraftShootStrategy;
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.BaseBullet;
-import edu.hitsz.bullet.EnemyBullet;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class BossEnemy extends AbstractAircraft {
-    public BossEnemy(int locationX,int locationY,int speddX,int speedY,int hp){
-        super(locationX,locationY,speddX,speedY,hp);
+    public BossEnemy(int locationX,int locationY,int speedX,int speedY,int hp){
+        super(locationX,locationY,speedX,speedY,hp);
     }
 
-    private EnemyAircraftShootStrategy bossEnemyShottStrategy = new BossEnemyShoot();
-    private EnemyAircraftShootStrategy strategy = bossEnemyShottStrategy;
+    private final EnemyAircraftShootStrategy bossEnemyShotStrategy = new BossEnemyShoot();
+    private final EnemyAircraftShootStrategy strategy = bossEnemyShotStrategy;
     private AbstractAircraft bossEnemy;
 
     public void setBossEnemy(AbstractAircraft bossEnemy) {

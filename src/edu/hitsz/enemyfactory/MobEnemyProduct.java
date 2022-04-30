@@ -7,23 +7,27 @@ import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
 
 public class MobEnemyProduct implements EnemyAircraftProduct {
+
+    public static int mobEnemyHp = 30;
+    public static int mobEnemySpeedY = 10;
+
     @Override
-    public EliteEnemy createliteenemy() {
+    public EliteEnemy createEliteEnemy() {
         return null;
     }
 
     @Override
-    public BossEnemy creatbossenemy() {
+    public BossEnemy creatBossEnemy() {
         return null;
     }
 
     @Override
-    public MobEnemy creatmobenemy() {
+    public MobEnemy creatMobEnemy() {
         return new MobEnemy(
-                (int) ( Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
-                (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2)*1,
+                (int) (Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth())),
+                (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2),
                 0,
-                10,
-                30);
+                mobEnemySpeedY,
+                mobEnemyHp);
     }
 }

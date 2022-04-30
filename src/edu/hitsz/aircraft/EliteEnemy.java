@@ -2,14 +2,9 @@ package edu.hitsz.aircraft;
 
 import edu.hitsz.AircraftStrategy.EliteEnemyShoot;
 import edu.hitsz.AircraftStrategy.EnemyAircraftShootStrategy;
-import edu.hitsz.application.Game;
-import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.BaseBullet;
-import edu.hitsz.bullet.EnemyBullet;
-import edu.hitsz.bullet.HeroBullet;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -19,12 +14,14 @@ import java.util.List;
 public class EliteEnemy extends AbstractAircraft{
 
 
+
+
     public EliteEnemy(int locationX,int locationY,int speedX,int speedY,int hp){
         super(locationX,locationY,speedX,speedY,hp);
     }
 
-    private EnemyAircraftShootStrategy eilteEnemyShootStrategy = new EliteEnemyShoot();
-    private EnemyAircraftShootStrategy strategy = eilteEnemyShootStrategy;
+    private final EnemyAircraftShootStrategy eliteEnemyShootStrategy = new EliteEnemyShoot();
+    private final EnemyAircraftShootStrategy strategy = eliteEnemyShootStrategy;
     private AbstractAircraft enemyAircraft;
 
 
