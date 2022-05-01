@@ -2,8 +2,10 @@ package edu.hitsz.aircraft;
 
 import edu.hitsz.aircraft.stratege.EliteEnemyShoot;
 import edu.hitsz.aircraft.stratege.EnemyAircraftShootStrategy;
+import edu.hitsz.application.AbstractGame;
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.BaseBullet;
+import edu.hitsz.watcher.EnemyObserver;
 
 import java.util.List;
 
@@ -12,7 +14,7 @@ import java.util.List;
  *
  * @author 谢岸峰
  */
-public class EliteEnemy extends AbstractAircraft{
+public class EliteEnemy extends AbstractAircraft implements EnemyObserver {
 
 
 
@@ -46,5 +48,15 @@ public class EliteEnemy extends AbstractAircraft{
      */
     public List<BaseBullet> shoot() {
         return strategy.shoot(enemyAircraft);
+    }
+
+    @Override
+    public void update(List<AbstractAircraft> enemyAircraft, List<BaseBullet> enemyBullets) {
+        for (AbstractAircraft enemy : enemyAircraft){
+            if (enemy instanceof EliteEnemy){
+                AbstractGame.score += 20;
+                enemy.vanish();
+            }
+        }
     }
 }

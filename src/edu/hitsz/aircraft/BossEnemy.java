@@ -4,13 +4,14 @@ import edu.hitsz.aircraft.stratege.BossEnemyShoot;
 import edu.hitsz.aircraft.stratege.EnemyAircraftShootStrategy;
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.BaseBullet;
+import edu.hitsz.watcher.EnemyObserver;
 
 import java.util.List;
 
 /**
  * @author 谢岸峰
  */
-public class BossEnemy extends AbstractAircraft {
+public class BossEnemy extends AbstractAircraft implements EnemyObserver {
     public BossEnemy(int locationX,int locationY,int speedX,int speedY,int hp){
         super(locationX,locationY,speedX,speedY,hp);
     }
@@ -37,5 +38,8 @@ public class BossEnemy extends AbstractAircraft {
         return strategy.shoot(bossEnemy);
     }
 
+    @Override
+    public void update(List<AbstractAircraft> enemyAircraft, List<BaseBullet> enemyBullets) {
 
+    }
 }

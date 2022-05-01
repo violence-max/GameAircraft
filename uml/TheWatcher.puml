@@ -1,14 +1,41 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-class EnemyAndTheirBullet{
+class EliteEnemy{
     + update(List<AbstractAircraft>,LIst<BaseBullet):void
 }
 
-interface TobeDelete{
+class BossEnemy{
+    + update(List<AbstractAircraft>,LIst<BaseBullet):void
+}
+
+class MobEnemy{
+    + update(List<AbstractAircraft>,LIst<BaseBullet):void
+}
+
+class EnemyBullet{
+    + update(List<AbstractAircraft>,LIst<BaseBullet):void
+}
+
+interface EnemyObserver{
         + update(List<AbstractAircraft>,LIst<BaseBullet):void
 }
 
-TobeDelete <|.. EnemyAndTheirBullet
+class AbstractGame{
+    # crashCheckAction():void
+}
+
+class BoomProp{
+    + boom(List<AbstractAircraft>,List<BaseBullet>):void
+}
+
+EnemyObserver <|.. EliteEnemy
+EnemyObserver <|.. EnemyBullet
+EnemyObserver <|.. BossEnemy
+EnemyObserver <|.. MobEnemy
+
+EnemyObserver <--o BoomProp
+
+BoomProp <-- AbstractGame
 
 @enduml

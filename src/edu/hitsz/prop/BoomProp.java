@@ -1,9 +1,12 @@
 package edu.hitsz.prop;
 
 import edu.hitsz.aircraft.AbstractAircraft;
+import edu.hitsz.aircraft.BossEnemy;
+import edu.hitsz.aircraft.EliteEnemy;
+import edu.hitsz.aircraft.MobEnemy;
 import edu.hitsz.bullet.BaseBullet;
-import edu.hitsz.watcher.EnemyAndTheirBullets;
-import edu.hitsz.watcher.TobeDelete;
+import edu.hitsz.bullet.EnemyBullet;
+import edu.hitsz.watcher.EnemyObserver;
 
 import java.util.List;
 
@@ -17,7 +20,19 @@ public class BoomProp extends AbstractProp  {
     }
 
     public void boom(List<AbstractAircraft> enemyAircraft, List<BaseBullet> enemyBullets){
-        TobeDelete delete = new EnemyAndTheirBullets();
-        delete.update(enemyAircraft,enemyBullets);
+        for (AbstractAircraft enemy : enemyAircraft){
+            if (enemy instanceof MobEnemy){
+                ((MobEnemy) enemy).update(enemyAircraft,enemyBullets);
+            }else if (enemy instanceof EliteEnemy){
+                ((EliteEnemy) enemy).update(enemyAircraft,enemyBullets);
+            }else if (enemy instanceof BossEnemy){
+                ((BossEnemy) enemy).update(enemyAircraft,enemyBullets);
+            }
+        }
+        for (BaseBullet enemyBullet : enemyBullets){
+            if (enemyBullet instanceof EnemyBullet){
+                ((EnemyBullet) enemyBullet).update(enemyAircraft,enemyBullets);
+            }
+        }
     }
 }

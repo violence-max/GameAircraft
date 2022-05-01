@@ -8,11 +8,11 @@ import java.util.List;
 /**
  * @author 谢岸峰
  */
-public interface TobeDelete {
+public interface EnemyObserver {
     /**
      * 更新方法
-     * @param enemyAircrafts
+     * @param enemyAircraft
      * @param enemyBullets
      */
-    void update(List<AbstractAircraft> enemyAircrafts,List<BaseBullet> enemyBullets);
+    void update(List<AbstractAircraft> enemyAircraft,List<BaseBullet> enemyBullets);
 }
