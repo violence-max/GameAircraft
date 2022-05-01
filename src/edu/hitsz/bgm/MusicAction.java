@@ -1,4 +1,4 @@
-package edu.hitsz.Bgm;
+package edu.hitsz.bgm;
 
 import edu.hitsz.application.MusicThread;
 

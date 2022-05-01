@@ -1,5 +1,9 @@
 package edu.hitsz.propfactory;
 
+/**
+ *
+ * @author 谢岸峰
+ */
 public class CreatFireProp extends AbstractPropFactory {
 
     @Override

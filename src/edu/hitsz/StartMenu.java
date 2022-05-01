@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * @author 谢岸峰
+ */
 public class StartMenu {
     private JPanel topPanel;
     private JPanel bottomPanel;
@@ -13,7 +16,7 @@ public class StartMenu {
     private JButton normalGame;
     private JButton hardGame;
     private JLabel music;
-    private JComboBox musicSelet;
+    private JComboBox musicSelect;
     private JPanel startMenu;
 
     /**
@@ -60,8 +63,8 @@ public class StartMenu {
         });
     }
 
-    public JComboBox getMusicSelet(){
-        return musicSelet;
+    public JComboBox getMusicSelect(){
+        return musicSelect;
     }
 
     public JPanel getStartMenu(){

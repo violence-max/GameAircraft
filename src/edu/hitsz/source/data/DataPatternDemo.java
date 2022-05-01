@@ -1,7 +1,10 @@
-package edu.hitsz.ScorceData;
+package edu.hitsz.source.data;
 
 import java.util.LinkedList;
 
+/**
+ * @author 谢岸峰
+ */
 public class DataPatternDemo {
 
     private int score;

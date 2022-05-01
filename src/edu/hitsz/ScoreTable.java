@@ -1,6 +1,6 @@
 package edu.hitsz;
 
-import edu.hitsz.ScorceData.Data;
+import edu.hitsz.source.data.Data;
 import edu.hitsz.application.AbstractGame;
 
 import javax.swing.*;
@@ -66,7 +66,9 @@ public class ScoreTable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = contentScoreTable.getSelectedRow();
-                if(row != -1 && JOptionPane.showConfirmDialog(scoreTablePanel,"是否要删除当前选中的玩家的得分记录？","删除记录",0) == 0){
+                String message = "是否要删除当前选中的玩家的得分记录？";
+                String title = "删除记录";
+                if(row != -1 && JOptionPane.showConfirmDialog(scoreTablePanel,message,title,0) == 0){
                     //删除一行数据
                     model.removeRow(row);
                     AbstractGame.dataPatternDemo.removeByRank(row+1);

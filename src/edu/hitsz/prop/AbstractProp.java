@@ -1,8 +1,11 @@
-package edu.hitsz.Prop;
+package edu.hitsz.prop;
 
 import edu.hitsz.application.Main;
 import edu.hitsz.basic.AbstractFlyingObject;
 
+/**
+ * @author 谢岸峰
+ */
 public class AbstractProp extends AbstractFlyingObject {
     public AbstractProp(int locationX,int locationY,int speedX,int speedY){
         super(locationX,locationY,speedX,speedY);

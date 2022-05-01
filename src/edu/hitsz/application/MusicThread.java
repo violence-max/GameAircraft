@@ -15,11 +15,16 @@ import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.sound.sampled.DataLine.Info;
 
+/**
+ * @author 谢岸峰
+ */
 public class MusicThread extends Thread {
 
 
-    //音频文件名
-    private String filename;
+    /**
+     * 音频文件名
+     */
+    private final String filename;
     private AudioFormat audioFormat;
     private byte[] samples;
     private boolean flag = false;

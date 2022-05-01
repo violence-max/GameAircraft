@@ -1,5 +1,12 @@
 package edu.hitsz.enemyfactory;
 
+/**
+ * @author 谢岸峰
+ */
 public interface EnemyAircraftFactory {
-    public EnemyAircraftProduct creatEnemyProduct();
+    /**
+     * 创建敌机产品
+     * @return
+     */
+    EnemyAircraftProduct creatEnemyProduct();
 }

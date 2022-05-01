@@ -1,9 +1,9 @@
 package edu.hitsz.application;
 
 
-import edu.hitsz.Prop.BoomProp;
-import edu.hitsz.Prop.FireProp;
-import edu.hitsz.Prop.HpProp;
+import edu.hitsz.prop.BoomProp;
+import edu.hitsz.prop.FireProp;
+import edu.hitsz.prop.HpProp;
 import edu.hitsz.aircraft.BossEnemy;
 import edu.hitsz.aircraft.EliteEnemy;
 import edu.hitsz.aircraft.HeroAircraft;

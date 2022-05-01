@@ -1,8 +1,8 @@
-package edu.hitsz.Prop;
+package edu.hitsz.prop;
 
-import edu.hitsz.AircraftStrategy.HeroAircraftShoot;
-import edu.hitsz.AircraftStrategy.HeroAircraftShootStrategy;
-import edu.hitsz.AircraftStrategy.HeroAircraftShootWithFire;
+import edu.hitsz.aircraft.stratege.HeroAircraftShoot;
+import edu.hitsz.aircraft.stratege.HeroAircraftShootStrategy;
+import edu.hitsz.aircraft.stratege.HeroAircraftShootWithFire;
 import edu.hitsz.aircraft.HeroAircraft;
 
 import java.util.concurrent.*;

@@ -1,5 +1,8 @@
-package edu.hitsz.Prop;
+package edu.hitsz.prop;
 
+/**
+ * @author 谢岸峰
+ */
 public class HpProp extends AbstractProp {
 
     private int hp = -50;
@@ -8,7 +11,7 @@ public class HpProp extends AbstractProp {
         super(locationX,locationY,speedX,speedY);
     }
 
-    public int increasehp(){
+    public int increaseHp(){
         return hp;
     }
 

@@ -1,7 +1,7 @@
 package edu.hitsz.aircraft;
 
-import edu.hitsz.AircraftStrategy.EliteEnemyShoot;
-import edu.hitsz.AircraftStrategy.EnemyAircraftShootStrategy;
+import edu.hitsz.aircraft.stratege.EliteEnemyShoot;
+import edu.hitsz.aircraft.stratege.EnemyAircraftShootStrategy;
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.BaseBullet;
 
@@ -9,7 +9,8 @@ import java.util.List;
 
 /**
  * 精英敌机
- * 
+ *
+ * @author 谢岸峰
  */
 public class EliteEnemy extends AbstractAircraft{
 

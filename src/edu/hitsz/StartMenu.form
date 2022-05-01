@@ -70,7 +70,7 @@
               <text value="音效"/>
             </properties>
           </component>
-          <component id="d8bc1" class="javax.swing.JComboBox" binding="musicSelet">
+          <component id="d8bc1" class="javax.swing.JComboBox" binding="musicSelect">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="90" height="45"/>

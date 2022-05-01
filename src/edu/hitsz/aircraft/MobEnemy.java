@@ -1,7 +1,7 @@
 package edu.hitsz.aircraft;
 
-import edu.hitsz.AircraftStrategy.EnemyAircraftShootStrategy;
-import edu.hitsz.AircraftStrategy.MobEnemyShoot;
+import edu.hitsz.aircraft.stratege.EnemyAircraftShootStrategy;
+import edu.hitsz.aircraft.stratege.MobEnemyShoot;
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.BaseBullet;
 

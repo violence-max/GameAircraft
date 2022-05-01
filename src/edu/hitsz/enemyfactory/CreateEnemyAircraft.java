@@ -4,7 +4,10 @@ import edu.hitsz.aircraft.BossEnemy;
 import edu.hitsz.aircraft.EliteEnemy;
 import edu.hitsz.aircraft.MobEnemy;
 
-public class CreatEnemyAircrafts {
+/**
+ * @author 谢岸峰
+ */
+public class CreateEnemyAircraft {
 
         public EliteEnemy createEliteEnemy(){
             EnemyAircraftFactory eliteEnemyFactory;

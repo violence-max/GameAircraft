@@ -1,14 +1,12 @@
 package edu.hitsz.aircraft;
 
 
-import edu.hitsz.AircraftStrategy.HeroAircraftShoot;
-import edu.hitsz.AircraftStrategy.HeroAircraftShootStrategy;
+import edu.hitsz.aircraft.stratege.HeroAircraftShoot;
+import edu.hitsz.aircraft.stratege.HeroAircraftShootStrategy;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.BaseBullet;
-import edu.hitsz.bullet.HeroBullet;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,7 +16,9 @@ import java.util.List;
 public class HeroAircraft extends AbstractAircraft {
 
 
-    //创建唯一英雄机
+    /**
+     * 创建唯一英雄机
+     */
     public static HeroAircraft heroAircraft = new HeroAircraft(
             Main.WINDOW_WIDTH / 2,
             Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
@@ -43,8 +43,11 @@ public class HeroAircraft extends AbstractAircraft {
         this.strategy = strategy;
     }
 
-    //lazy方式
-    public static synchronized HeroAircraft getheroaircraft(){
+    /**
+     * lazy方式
+     * @return
+     */
+    public static synchronized HeroAircraft getHeroAircraft(){
         if (heroAircraft == null){
             heroAircraft = new HeroAircraft(
                     Main.WINDOW_WIDTH / 2,

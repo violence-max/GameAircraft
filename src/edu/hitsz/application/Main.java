@@ -50,8 +50,9 @@ public class Main {
             }
         }
 
+        String open = "open";
         //获取音效选择
-        if (startMenu.getMusicSelet().getSelectedItem() == ("open")){
+        if (startMenu.getMusicSelect().getSelectedItem() == (open)){
             IS_MUSIC = true;
         }else{
             IS_MUSIC = false;

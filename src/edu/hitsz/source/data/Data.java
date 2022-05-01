@@ -1,7 +1,10 @@
-package edu.hitsz.ScorceData;
+package edu.hitsz.source.data;
 
 import java.io.Serializable;
 
+/**
+ * @author 谢岸峰
+ */
 public class Data implements Serializable {
     private Integer dataId;
     private String userName;

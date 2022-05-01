@@ -6,6 +6,9 @@ import edu.hitsz.aircraft.MobEnemy;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
 
+/**
+ * @author 谢岸峰
+ */
 public class MobEnemyProduct implements EnemyAircraftProduct {
 
     public static int mobEnemyHp = 30;

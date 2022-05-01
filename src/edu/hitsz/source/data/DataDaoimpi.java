@@ -1,4 +1,4 @@
-package edu.hitsz.ScorceData;
+package edu.hitsz.source.data;
 
 import edu.hitsz.StartMenu;
 

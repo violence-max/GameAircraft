@@ -1,8 +1,8 @@
 package edu.hitsz.application;
 
-import edu.hitsz.Bgm.MusicAction;
-import edu.hitsz.ScorceData.DataPatternDemo;
-import edu.hitsz.Prop.*;
+import edu.hitsz.bgm.MusicAction;
+import edu.hitsz.source.data.DataPatternDemo;
+import edu.hitsz.prop.*;
 import edu.hitsz.aircraft.*;
 import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.basic.AbstractFlyingObject;
@@ -84,7 +84,7 @@ public abstract class AbstractGame extends JPanel {
     /**
      * 创建敌机的对象
      */
-    protected CreatEnemyAircrafts creatEnemyAircrafts = new CreatEnemyAircrafts();
+    protected CreateEnemyAircraft createEnemyAircraft = new CreateEnemyAircraft();
     /**
      * 上一次敌机得到增强的时间，起初为0
      */
@@ -144,7 +144,7 @@ public abstract class AbstractGame extends JPanel {
     protected int boundCycleTime;
 
     public AbstractGame() {
-        heroAircraft = HeroAircraft.getheroaircraft();
+        heroAircraft = HeroAircraft.getHeroAircraft();
         enemyAircraft = new LinkedList<>();
         heroBullets = new LinkedList<>();
         enemyBullets = new LinkedList<>();
@@ -157,12 +157,6 @@ public abstract class AbstractGame extends JPanel {
         new HeroController(this, heroAircraft);
     }
 
-    /**
-     * 打印难度变化
-     */
-    protected void printDifficulty(){
-
-    }
 
     /**
      * 增强敌机属性：血量、向下飞行速度
@@ -216,12 +210,12 @@ public abstract class AbstractGame extends JPanel {
         if (enemyAircraft.size() < enemyMaxNumber) {
             //普通敌机
             if(temp1 == 0){
-                MobEnemy mobEnemy = creatEnemyAircrafts.creatMobEnemy();
+                MobEnemy mobEnemy = createEnemyAircraft.creatMobEnemy();
                 enemyAircraft.add(mobEnemy);
             }
             //精英敌机
             else{
-                EliteEnemy eliteEnemy = creatEnemyAircrafts.createEliteEnemy();
+                EliteEnemy eliteEnemy = createEnemyAircraft.createEliteEnemy();
                 enemyAircraft.add(eliteEnemy);
             }
         }
@@ -256,7 +250,7 @@ public abstract class AbstractGame extends JPanel {
 
         if (bossIsExistFlag){
             //创建boss敌机
-            BossEnemy bossEnemy = creatEnemyAircrafts.creatBossEnemy();
+            BossEnemy bossEnemy = createEnemyAircraft.creatBossEnemy();
             enemyAircraft.add(bossEnemy);
             bossIsExistFlag = false;
 
@@ -382,18 +376,17 @@ public abstract class AbstractGame extends JPanel {
      */
     protected void crashCheckAction() {
         // TODO 敌机子弹攻击英雄
-        for (BaseBullet fbullet : enemyBullets){
-            if (fbullet.notValid()){
+        for (BaseBullet fakeBullet : enemyBullets){
+            if (fakeBullet.notValid()){
                 continue;
             }
-            if(heroAircraft.crash(fbullet)){
+            if(heroAircraft.crash(fakeBullet)){
                 //英雄机撞击到敌机子弹
                 //英雄机损失一定生命值
-                heroAircraft.decreaseHp(fbullet.getPower());
-                fbullet.vanish();
+                heroAircraft.decreaseHp(fakeBullet.getPower());
+                fakeBullet.vanish();
             }
         }
-
         // 英雄子弹攻击敌机
         for (BaseBullet bullet : heroBullets) {
             if (bullet.notValid()) {
@@ -406,8 +399,6 @@ public abstract class AbstractGame extends JPanel {
                     continue;
                 }
                 if (enemyAircraft.crash(bullet)) {
-
-
                     if (Main.IS_MUSIC){
                         //播放英雄击中敌机的bgm
                         musicAction.shootHitBgm();
@@ -423,25 +414,24 @@ public abstract class AbstractGame extends JPanel {
                             int temp2 = r.nextInt(4);
                             if (temp2 == 0){
                                 //产生恢复hp道具
-                                HpProp hp = creatProps.creathpprop(enemyAircraft);
+                                HpProp hp = creatProps.creatHpProp(enemyAircraft);
                                 props.add(hp);
                             }
                             //产生增强火力道具
                             else if(temp2 == 1){
-                                FireProp fire = creatProps.creatfireprop(enemyAircraft);
+                                FireProp fire = creatProps.creatFireProp(enemyAircraft);
                                 props.add(fire);
                             }
                             //产生炸弹道具
                             else if(temp2 == 2){
-                                BoomProp boom = creatProps.creatboomprop(enemyAircraft);
+                                BoomProp boom = creatProps.creatBoomProp(enemyAircraft);
                                 props.add(boom);
                             }
                         }
-
-                        /**
-                         * 消灭普通敌机加10分
-                         * 消灭精英敌机加20分
-                         * 消灭boss敌机加200分
+                        /*
+                          消灭普通敌机加10分
+                          消灭精英敌机加20分
+                          消灭boss敌机加200分
                          */
                         if (enemyAircraft instanceof MobEnemy){
                             score += 10;
@@ -469,13 +459,11 @@ public abstract class AbstractGame extends JPanel {
                 }
             }
         }
-
-
         // Todo: 我方获得道具，道具生效
         for(AbstractProp prop : props){
             if (prop.crash(heroAircraft )|| heroAircraft.crash(prop)){
                 if(prop instanceof HpProp){
-                    heroAircraft.decreaseHp(((HpProp) prop).increasehp());
+                    heroAircraft.decreaseHp(((HpProp) prop).increaseHp());
                 }else if(prop instanceof BoomProp){
                     if (Main.IS_MUSIC){
                         //播放获取炸弹道具的背景音乐
@@ -494,7 +482,6 @@ public abstract class AbstractGame extends JPanel {
                 prop.vanish();
             }
         }
-
     }
 
     /**

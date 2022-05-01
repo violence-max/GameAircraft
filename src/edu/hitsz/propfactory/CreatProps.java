@@ -1,51 +1,54 @@
 package edu.hitsz.propfactory;
 
-import edu.hitsz.Prop.BoomProp;
-import edu.hitsz.Prop.FireProp;
-import edu.hitsz.Prop.HpProp;
+import edu.hitsz.prop.BoomProp;
+import edu.hitsz.prop.FireProp;
+import edu.hitsz.prop.HpProp;
 import edu.hitsz.aircraft.AbstractAircraft;
 
+/**
+ * @author 谢岸峰
+ */
 public class CreatProps {
 
-    public HpProp creathpprop(AbstractAircraft enemyaircraft) {
-        int x = enemyaircraft.getLocationX();
-        int y = enemyaircraft.getLocationY();
+    public HpProp creatHpProp(AbstractAircraft enemyAircraft) {
+        int x = enemyAircraft.getLocationX();
+        int y = enemyAircraft.getLocationY();
         int speedX = 0;
-        int speedY = enemyaircraft.getSpeedY();
+        int speedY = enemyAircraft.getSpeedY();
 
-        AbstractPropFactory hppropfactory;
-        AbstractPropProduct hppropproduct;
+        AbstractPropFactory hpPropFactory;
+        AbstractPropProduct hpPropProduct;
 
-        hppropfactory = new CreatHpProp();
-        hppropproduct= hppropfactory.creatPropProduct(x,y,speedX,speedY);
-        return hppropproduct.creathpprop(x,y,speedX,speedY);
+        hpPropFactory = new CreatHpProp();
+        hpPropProduct= hpPropFactory.creatPropProduct(x,y,speedX,speedY);
+        return hpPropProduct.creatHpProp(x,y,speedX,speedY);
     }
 
-    public FireProp creatfireprop(AbstractAircraft enemyaircraft) {
-        int x = enemyaircraft.getLocationX();
-        int y = enemyaircraft.getLocationY();
+    public FireProp creatFireProp(AbstractAircraft enemyAircraft) {
+        int x = enemyAircraft.getLocationX();
+        int y = enemyAircraft.getLocationY();
         int speedX = 0;
-        int speedY = enemyaircraft.getSpeedY();
+        int speedY = enemyAircraft.getSpeedY();
 
-        AbstractPropFactory firepropfactory;
-        AbstractPropProduct firepropproduct;
+        AbstractPropFactory firePropFactory;
+        AbstractPropProduct firePropProduct;
 
-        firepropfactory = new CreatFireProp();
-        firepropproduct= firepropfactory.creatPropProduct(x,y,speedX,speedY);
-        return firepropproduct.creatfireprop(x,y,speedX,speedY);
+        firePropFactory = new CreatFireProp();
+        firePropProduct= firePropFactory.creatPropProduct(x,y,speedX,speedY);
+        return firePropProduct.creatFireProp(x,y,speedX,speedY);
     }
 
-    public BoomProp creatboomprop(AbstractAircraft enemyaircraft) {
-        int x = enemyaircraft.getLocationX();
-        int y = enemyaircraft.getLocationY();
+    public BoomProp creatBoomProp(AbstractAircraft enemyAircraft) {
+        int x = enemyAircraft.getLocationX();
+        int y = enemyAircraft.getLocationY();
         int speedX = 0;
-        int speedY = enemyaircraft.getSpeedY();
+        int speedY = enemyAircraft.getSpeedY();
 
-        AbstractPropFactory boompropfactory;
-        AbstractPropProduct boompropproduct;
+        AbstractPropFactory boomPropFactory;
+        AbstractPropProduct boomPropProduct;
 
-        boompropfactory = new CreatBoomProp();
-        boompropproduct= boompropfactory.creatPropProduct(x,y,speedX,speedY);
-        return boompropproduct.creatboomprop(x,y,speedX,speedY);
+        boomPropFactory = new CreatBoomProp();
+        boomPropProduct= boomPropFactory.creatPropProduct(x,y,speedX,speedY);
+        return boomPropProduct.creatBoomProp(x,y,speedX,speedY);
     }
 }
