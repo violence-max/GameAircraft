@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class EnemyAndTheirBullet{
+    + update(List<AbstractAircraft>,LIst<BaseBullet):void
+}
+
+interface TobeDelete{
+        + update(List<AbstractAircraft>,LIst<BaseBullet):void
+}
+
+TobeDelete <|.. EnemyAndTheirBullet
+
+@enduml

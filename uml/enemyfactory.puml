@@ -6,9 +6,9 @@ interface EnemyAircraftFactory{
 }
 
 interface EnemyAircraftProduct{
-    + createliteenemy():EliteEnemy
-    + creatmobnemy():MobEnemy
-    + creatbossenemy():BossEnemy
+    + createEliteEnemy():EliteEnemy
+    + createMobEnemy():MobEnemy
+    + createBossEnemy():BossEnemy
 }
 
 EnemyAircraftProduct <|.. EliteEnemyProduct
@@ -36,21 +36,21 @@ class CreatBossEnemy{
 }
 
 class MobEnemyProduct {
-    + creatmobnemy():MobEnemy
-    + createliteenemy():EliteEnemy
-    + creatbossenemy():BossEnemy
+    + creatMobEnemy():MobEnemy
+    + createEliteEnemy():EliteEnemy
+    + createBossEnemy():BossEnemy
 }
 
 class EliteEnemyProduct {
-    + createliteenemy():EliteEnemy
-    + creatmobnemy():MobEnemy
-    + creatbossenemy():BossEnemy
+    + createEliteEnemy():EliteEnemy
+    + createMobEnemy():MobEnemy
+    + createBossEnemy():BossEnemy
 }
 
 class BossEnemyProduct{
-    + createliteenemy():EliteEnemy
-    + creatmobnemy():MobEnemy
-    + creatbossenemy():BossEnemy
+    + createEliteEnemy():EliteEnemy
+    + createMobEnemy():MobEnemy
+    + createBossEnemy():BossEnemy
 }
 
 @enduml

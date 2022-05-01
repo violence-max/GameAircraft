@@ -5,11 +5,11 @@ class HeroAircraft {
     - shootNum:int
     - power:int
     - direction:int
-    + heroaircraft:HeroAircraft
+    + heroAircraft:HeroAircraft
     + HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
     + shoot():List<BaseBullet>
-    + getheroaircraft():HeroAircraft
+    + getHeroAircraft():HeroAircraft
 }
 
 @enduml

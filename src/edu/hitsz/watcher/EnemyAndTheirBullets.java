@@ -11,10 +11,10 @@ import java.util.List;
 /**
  * @author 谢岸峰
  */
-public class EnemysAndTheirBullets implements TobeDelete{
+public class EnemyAndTheirBullets implements TobeDelete{
     @Override
-    public void update(List<AbstractAircraft> enemyAircrafts, List<BaseBullet> enemyBullets) {
-        for(AbstractAircraft enemyAircraft : enemyAircrafts){
+    public void update(List<AbstractAircraft> theEnemyAircraft, List<BaseBullet> enemyBullets) {
+        for(AbstractAircraft enemyAircraft : theEnemyAircraft){
             if(enemyAircraft instanceof MobEnemy){
                 AbstractGame.score += 10;
                 //清除普通敌机并加10分

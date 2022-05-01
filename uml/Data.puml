@@ -12,23 +12,33 @@ interface DataDao{
     + getDay():int
     + getHour():int
     + getMinute():int
+    + getDataTable():LinkedLIst<Data>
+    + getRank():Integer
+    + setUserName(String):void
+    + removeByRank(int):void
+    + fileSelect():void
 }
 
 class DataDaoimpi{
-    - dataTable:LinkedLIst<Data>()
-    - file:File
-    - readOnlyFile:File
+    - dataTable:LinkedLIst<Data>
+    - easyModeFile:File
+    - commonModeFile:File
+    - hardModeFile:File
     + DataDaoimpi()
     + sortData():void
     + doAdd(int score, int month, int day, int hour, int minute):void
     + creatFile():void
     + fileWriter():void
     + fileReader():void
-    + fileCopy():void
     + getMonth():int
     + getDay():int
     + getHour():int
     + getMinute():int
+    + getDataTable():LinkedLIst<Data>
+    + getRank():Integer
+    + setUserName(String):void
+    + removeByRank(int):void
+    + fileSelect():void
 }
 
 DataDao <|.. DataDaoimpi
@@ -41,38 +51,45 @@ class Data{
     - day:int
     - hour:int
     - minute:int
-    + setMinute():void
+    + setDataId():void
     + getDataId():int
     + getScore():int
     + getMonth():int
     + getDay():int
     + getHour():int
     + getMinute():int
+    + getUserName():String
+    + setUserName():void
+    + toString():String
 }
 
 Data <-- DataDaoimpi
 
-class DataPattrenDemo{
-    - dataId:int
+class DataPatternDemo{
     - score:int
     - month:int
     - day:int
     - hour:int
     - minute:int
-    + DataPattrenDemo()
-    + setDataId():void
+    + DataPatternDemo()
+    - dataDao:DataDao
     + setScore():void
     + setMonth():void
     + setDay():void
     + setHour():void
+    + getScore():void
     + addData():void
     + sort():void
     + fileCreat():void
-    + fileWrite():void
-    + fileRead():void
-    + fileCopy():void
+    + fileWriter():void
+    + fileReader():void
+    + getDataTable():LinkedLIst<Data>
+    + setUserName(String):void
+    + removeByRank(ing):void
+    + fileSelect():void
+    + fileAction():void
 }
 
-DataDao <.. DataPattrenDemo
+DataDao <.. DataPatternDemo
 
 @enduml

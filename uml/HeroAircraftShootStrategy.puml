@@ -2,22 +2,15 @@
 'https://plantuml.com/class-diagram
 
 class HeroAircraftShoot{
-    - eliteShootNum:int
-    - eliteDirection:int
-    - elitePower:int
-    + shoot():List<BaseBullet>
+    + shoot(AbstractAircraft):List<BaseBullet>
 }
 
 class HeroAircraftShootWithFire{
-    - eliteShootNum:int
-    - eliteDirection:int
-    - elitePower:int
-    + shoot():List<BaseBullet>
+    + shoot(AbstractAircraft):List<BaseBullet>
 }
 
 interface HeroAircraftShootStrategy{
-    + shootDirectely():List<BaseBullet>
-    + shootScattering():List<BaseBullet>
+    + shoot(AbstractAircraft):List<BaseBullet>
 }
 
 class HeroAirCraft{

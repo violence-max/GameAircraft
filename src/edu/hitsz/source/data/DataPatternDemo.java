@@ -13,68 +13,65 @@ public class DataPatternDemo {
     private int hour;
     private int minute;
 
-    private DataDao dateDao = new DataDaoimpi();
+    private final DataDao dataDao = new DataDaoimpi();
 
     public void setScore(int score) {
         this.score = score;
     }
 
     public void setMonth(){
-        month = dateDao.getMonth();
+        month = dataDao.getMonth();
     }
 
     public void setDay(){
-        day = dateDao.getDay();
+        day = dataDao.getDay();
     }
 
     public void setHour(){
-        hour = dateDao.getHour();
+        hour = dataDao.getHour();
     }
 
     public void setMinute(){
-        minute = dateDao.getMinute();
+        minute = dataDao.getMinute();
     }
 
     public int getScore(){
         return score;
     }
 
-    public Integer getRank() {
-        return dateDao.getRank();
-    }
-
     public void addData(){
-        dateDao.doAdd(score,month,day,hour,minute);
+        dataDao.doAdd(score,month,day,hour,minute);
     }
 
     public void sort(){
-        dateDao.sortData();
+        dataDao.sortData();
     }
 
     public void fileCreat(){
-        dateDao.creatFile();
+        dataDao.creatFile();
     }
 
-    public void fileWrite(){dateDao.fileWriter();}
+    public void fileWriter(){
+        dataDao.fileWriter();}
 
     public void fileReader(){
-        dateDao.fileReader();
+        dataDao.fileReader();
     }
 
     public LinkedList<Data> getDataTable(){
-        return dateDao.getDataTable();
+        return dataDao.getDataTable();
     }
 
     public void setUserName(String userName){
-        dateDao.setUserName(userName);
+        dataDao.setUserName(userName);
     }
 
     public void removeByRank(int rank){
-        dateDao.removeByRank(rank);
+        dataDao.removeByRank(rank);
     }
 
     public void fileSelect(){
-        dateDao.fileSelect();
+        dataDao.fileSelect();
     }
 
     public void fileAction(int score){
@@ -99,7 +96,7 @@ public class DataPatternDemo {
         //对得分进行排名
         this.sort();
         //将数据写入文件
-        this.fileWrite();
+        this.fileWriter();
     }
 
 }

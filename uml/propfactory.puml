@@ -3,48 +3,48 @@
 
 class HpPropProduct{
     + HpPropProduct(int locationX,int locationY,int speedX,int speedY)
-    + creathpprop(int locationX, int locationY, int speedX, int speedY):HpProp
+    + creatHpProp(int locationX, int locationY, int speedX, int speedY):HpProp
 }
 
 class FirePropProduct{
     + FirePropProduct(int locationX,int locationY,int speedX,int speedY)
-    + creatfireprop(int locationX, int locationY, int speedX, int speedY):FireProp
+    + creatFireProp(int locationX, int locationY, int speedX, int speedY):FireProp
 }
 
 class BoomPropProduct{
     + BoomPropProduct(int locationX,int locationY,int speedX,int speedY)
-    + creatboomprop(int locationX, int locationY, int speedX, int speedY):BoomProp
+    + creatBoomProp(int locationX, int locationY, int speedX, int speedY):BoomProp
 }
 
-class PropFactory{
-    + creatPropProduct():PropProduct
+class AbstractPropFactory{
+    + creatPropProduct():AbstractPropProduct
 }
 
-class PropProduct{
-    + creathpprop():HpProp
-    + creatfireprop():FireProp
-    + creatboomprop():BoomProp
+class AbstractPropProduct{
+    + creatHpProp():HpProp
+    + creatFireProp():FireProp
+    + creatBoomProp():BoomProp
 }
 
 class CreatHpProp{
-    + creatPropProduct():PropProduct
+    + creatPropProduct():AbstractPropProduct
 }
 
 class CreatFireProp{
-    + creatPropProduct():PropProduct
+    + creatPropProduct():AbstractPropProduct
 }
 
 class CreatBoomProp{
-    + creatPropProduct():PropProduct
+    + creatPropProduct():AbstractPropProduct
 }
 
-PropFactory <|.. CreatHpProp
-PropFactory <|.. CreatFireProp
-PropFactory <|.. CreatBoomProp
+AbstractPropFactory <|-- CreatHpProp
+AbstractPropFactory <|-- CreatFireProp
+AbstractPropFactory <|-- CreatBoomProp
 
-PropProduct <|.. HpPropProduct
-PropProduct <|.. FirePropProduct
-PropProduct <|.. BoomPropProduct
+AbstractPropProduct <|-- HpPropProduct
+AbstractPropProduct <|-- FirePropProduct
+AbstractPropProduct <|-- BoomPropProduct
 
 CreatHpProp <.. HpPropProduct
 CreatFireProp <.. FirePropProduct

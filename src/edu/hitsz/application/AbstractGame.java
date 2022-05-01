@@ -238,8 +238,8 @@ public abstract class AbstractGame extends JPanel {
      * 创建boss敌机
      */
     protected void creatBossEnemy(){
-        /**
-         * 以1000分为阈值，超过则新建一架boss敌机
+        /*
+          以1000分为阈值，超过则新建一架boss敌机
          */
         if (score - fakeScore >= bossAppear && enemyAircraft.size() < enemyMaxNumber){
             bossLastAppearTime = bossAppearTime;

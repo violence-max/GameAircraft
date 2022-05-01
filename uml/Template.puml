@@ -1,0 +1,86 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class AbstractGame{
+    # executorService:ScheduleExecutorService
+    # timeInterval:int
+    # heroAircraft:HeroAircraft
+    # enemyAircraft:List<AbstractAircraft>
+    # enemyBullets:List<BaseBullet>
+    # heroBullets:List<BaseBullet>
+    # props:List<AbstractProp>
+    # enemyMaxNumber:int
+    # gameOverFlag:boolean
+    + score:int
+    # time:int
+    # cycleDuration:int
+    # cycleTime:int
+    # r:Random
+    # temp1:int
+    # bossIsExistFlag:boolean
+    # fakeScore:int
+    # bossAppear:int
+    # musicAction:MusicAction
+    # dataPatterDemo:DataPatterDemo
+    # creatEnemyAircraft:CreatEnemyAircraft
+    # enemyEnhanceLastTime:int
+    # enemyEnhanceCycleTime:int
+    # bossAppearTime:int
+    # bossLastAppearTime:int
+    # bossAppearFlag:boolean
+    # shootCycleTime:int
+    # shootTime:int
+    # shootCycleTimeLast:int
+    # shootChangeTime:int
+    # shootCycleLeastTime:int
+    # bound:int
+    # boundLastChangeTime:int
+    # boundCycleTime:int
+    + AbstractGame()
+    # enhanceEnemy():void
+    # changeEnemyHpAndSpeedY(int,int):void
+    # action():void
+    # shootCycleAndShootAction():void
+    # creatMobEnemyAndEliteEnemy():void
+    # boundChange(int):void
+    # creatBossEnemy():void
+    # startMusic():void
+    # gameOverCheck():void
+    # timeCountAndNewCycleJudge():boolean
+    # shootAction():void
+    # bulletsMoveAction():void
+    # propMoveAction():void
+    # aircraftMoveAction():void
+    # crashCheckAction():void
+    # postProcessAction():void
+    # paint(Graghics):void
+    # paintImageWithPositionRevised((Graghics),List<? extends AbstractFlyingObject>):void
+    # paintScoreAndLife((Graghics):void
+}
+
+class EasyGame{
+    + EasyGame()
+    + action():void
+    + enhanceEnemy():void
+}
+
+class CommonGame{
+    - enemyAddHp:int
+    - enemySpeedy:int
+    # action():void
+    # enhanceEnemy():void
+}
+class HardGame{
+    - bossAddHp:int
+    - enemyAddHp:int
+    - enemySpeedy:int
+    # action():void
+    # enhanceEnemy():void
+    - enhanceBossEnemyHp():void
+}
+
+AbstractGame <|-- EasyGame
+AbstractGame <|-- CommonGame
+AbstractGame <|-- HardGame
+
+@enduml

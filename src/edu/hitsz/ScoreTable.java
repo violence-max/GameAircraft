@@ -22,16 +22,15 @@ public class ScoreTable {
     private JLabel concrectHeaderPanel;
     private JLabel modeLabel;
 
-    private String easyLabelText = "难度：简单";
-    private String commonLabelText = "难度：普通";
-    private String hardLabelText = "难度：困难";
-
     public ScoreTable(){
         if(StartMenu.difficultyMode == 0){
+            String easyLabelText = "难度：简单";
             this.setLabelText(easyLabelText);
         }else if (StartMenu.difficultyMode == 1){
+            String commonLabelText = "难度：普通";
             this.setLabelText(commonLabelText);
         }else{
+            String hardLabelText = "难度：困难";
             this.setLabelText(hardLabelText);
         }
         //获取用户名字

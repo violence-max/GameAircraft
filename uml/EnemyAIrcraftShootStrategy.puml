@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-interface EnemyAIrcraftShootStrategy{
+interface EnemyAircraftShootStrategy{
     + shoot():List<BaseBullet>
 }
 
@@ -24,29 +24,29 @@ class BossEnemyShoot{
 }
 
 class EliteEnemy{
-    - eliteEnemyShootStrategy:EnemyAIrcraftShootStrategy
-    - strategy:EnemyAIrcraftShootStrategy
+    - eliteEnemyShootStrategy:EnemyAircraftShootStrategy
+    - strategy:EnemyAircraftShootStrategy
     + shoot():List<BaseBullet>
 }
 
 class BossEnemy{
-    - bossEnemyShootStrategy:EnemyAIrcraftShootStrategy
-    - strategy:EnemyAIrcraftShootStrategy
+    - bossEnemyShootStrategy:EnemyAircraftShootStrategy
+    - strategy:EnemyAircraftShootStrategy
     + shoot():List<BaseBullet>
 }
 
 class MobEnemy{
-    - mobEnemyShootStrategt:EnemyAIrcraftShootStrategy
-    - strategy:EnemyAIrcraftShootStrategy
+    - mobEnemyShootStrategy:EnemyAircraftShootStrategy
+    - strategy:EnemyAircraftShootStrategy
     + shoot():List<BaseBullet>
 }
 
-EnemyAIrcraftShootStrategy <|.. BossEnemyShoot
-EnemyAIrcraftShootStrategy <|.. EliteEnemyShoot
-EnemyAIrcraftShootStrategy <|.. MobEnemyShoot
+EnemyAircraftShootStrategy <|.. BossEnemyShoot
+EnemyAircraftShootStrategy <|.. EliteEnemyShoot
+EnemyAircraftShootStrategy <|.. MobEnemyShoot
 
 
-EnemyAIrcraftShootStrategy o-- EliteEnemy
-EnemyAIrcraftShootStrategy o-- BossEnemy
-EnemyAIrcraftShootStrategy o-- MobEnemy
+EnemyAircraftShootStrategy o-- EliteEnemy
+EnemyAircraftShootStrategy o-- BossEnemy
+EnemyAircraftShootStrategy o-- MobEnemy
 @enduml
