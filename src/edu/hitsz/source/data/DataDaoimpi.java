@@ -46,8 +46,8 @@ public class DataDaoimpi implements DataDao{
             }
         }
         else{
-            /**
-             * 对数据链表中除末尾以外的元素进行循环，将末尾元素插入合适的位置
+            /*
+              对数据链表中除末尾以外的元素进行循环，将末尾元素插入合适的位置
              */
             for(int i=0; i<dataTable.size()-1; i++){
                 //第i+1个数据不是未插入前的最后一个数据
@@ -248,15 +248,17 @@ public class DataDaoimpi implements DataDao{
 
     @Override
     public void removeByRank(int rank) {
-        for(int i=0; i<dataTable.size(); i++){
-            if(dataTable.get(i).getDataId().equals(rank)){
-                dataTable.remove(i);
-                for(int j=i+1; j<dataTable.size(); j++){
-                    dataTable.get(j).setDataId(j+2);
+        //记录原来数据集的数据个数
+        int n = dataTable.size();
+        //删除排名为rank的数据
+        dataTable.removeIf(data -> data.getDataId().equals(rank));
+        //对排名为rank+1以上的数据实行排名减一的操作
+        for (int i=rank+1; i<=n; i++){
+            for (Data data : dataTable){
+                if (data.getDataId().equals(i)){
+                    data.setDataId(i-1);
                 }
-                break;
             }
-
         }
         this.fileWriter();
     }

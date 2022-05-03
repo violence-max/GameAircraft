@@ -109,6 +109,7 @@ public class HardGame extends AbstractGame {
         changeEnemyHpAndSpeedY(enemyAddHp,enemySpeedy);
         //跨越一个周期则增加血量和移动速度和敌机最大数量
         enemyMaxNumber += 1;
+        System.out.println("难度提升：普通敌机、精英敌机数量加一");
         //血量增加10
         enemyAddHp += 10;
         //普通敌机和精英敌机向下移动速度增加2
